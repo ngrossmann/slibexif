@@ -3,7 +3,7 @@ name := "libexif"
 
 description := "Library to access EXIF information in JPEG files"
 
-organization := "de.n12n.exif"
+organization := "net.n12n.exif"
 
 version := "0.1.0-SNAPSHOT"
 
