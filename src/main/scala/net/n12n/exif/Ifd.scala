@@ -17,7 +17,6 @@
  * You should have received a copy of the GNU Lesser Public License
  * along with libexif.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.n12n.exif
 
 /**
@@ -26,13 +25,15 @@ package net.n12n.exif
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].
  */
-class Ifd[T <: IfdAttribute[U], U <: Tag](exif: ExifSegment, offset: Int, bytes2tag: (Int) => U) {
+class Ifd[T <: Tag](exif: ExifSegment, offset: Int, bytes2tag: (Int) => T) {
   val count = exif.data.toShort(exif.tiffOffset + offset, exif.byteOrder)
-  val tags = for (i <- 0 until count) yield 
+  val tags: Seq[IfdAttribute[T]] = for (i <- 0 until count) yield 
     IfdAttribute(exif.data, offset + 2 + i * IfdAttribute.Length, exif.tiffOffset, exif.byteOrder,
         bytes2tag)
   val nextIfd = exif.data.toSignedLong(exif.tiffOffset + offset + 2 + count * IfdAttribute.Length,
       exif.byteOrder)
+  
+  def attr(tag: T): Option[IfdAttribute[T]] = tags.find(_.tag == tag)
   
   override def toString() = "IFD(%x, %x)\n%s".format(count, nextIfd, tags.mkString("  \n"))
 }

@@ -21,6 +21,15 @@ package net.n12n.exif
 
 object ExifSegment {
   val DefaultOrientation: Short = 1
+  /**
+   * List attributes in optional IFD.
+   * @param opt Optional IFD.
+   * @return Attributes or an empty list.
+   */
+  def listAttrs[T <: Tag](opt: Option[Ifd[T]]): List[IfdAttribute[T]] = opt match {
+    case Some(ifd) => ifd.tags.toList
+    case None => Nil
+  }
 }
 
 /**
@@ -31,7 +40,8 @@ object ExifSegment {
  * @param data segment data.
  */
 class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
-  extends Segment(Segment.App1Marker, length, data) { 
+  extends Segment(Segment.App1Marker, length, data) {
+  import ExifSegment._
   val tiffOffset = offset + 6
   private val tiffMarker = 42
   val name = data.zstring(offset);
@@ -40,16 +50,23 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
     throw new IllegalArgumentException("Not an EXIF segment TIFF marker not found(%d)".format(
         data.toSignedShort(tiffOffset + 2, byteOrder)))
   private val ifdOffset = data.toSignedLong(tiffOffset + 4, byteOrder)
+  /** The 0th IFD, always present. */
   val ifd0 = new TiffIfd(this, ifdOffset)
+  /** Optional 1st IFD. */
   val ifd1: Option[TiffIfd] = if (ifd0.nextIfd != 0) Some(new TiffIfd(this, ifd0.nextIfd)) else None
+  /** Optional Exif IFD. */
   val exifIfd: Option[ExifIfd] = ifd0.tags.find(_.tag == TiffIfd.ExifIfdPointer) match {
     case Some(pointer: LongIFD[_]) => Some(new ExifIfd(this, pointer.value.head.toInt))
     case None => None
   }
+  /** Optional GPS IFD. */
   val gpsIfd: Option[GpsIfd] = ifd0.tags.find(_.tag == TiffIfd.GpsInfoIfdPointer) match {
     case Some(pointer: LongIFD[_]) => Some(new GpsIfd(this, pointer.value.head.toInt))
     case None => None
   }
+  /** List of all attributes of all IFDs of this segment. */
+  lazy val allAttrs: List[IfdAttribute[Tag]] = ifd0.tags.toList ::: listAttrs(ifd1) ::: 
+    listAttrs(exifIfd) ::: listAttrs(gpsIfd)
   /**
    * Image orientation.
    * {{{
@@ -69,7 +86,42 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
     case Some(ifd) => ifd.data.toShort(0, byteOrder)
     case _ => ExifSegment.DefaultOrientation
   }
-    
+  
+  /**
+   * Find attribute in 0th or 1st IFD.
+   * @param tag Attribute tag.
+   * @return Option containing the attribute or *None*.
+   */
+  def attr(tag: TiffTag): Option[IfdAttribute[TiffTag]] = {
+    ifd0.attr(tag) match {
+      case Some(tag) => Some(tag)
+      case None => ifd1 match {
+        case Some(ifd) => ifd.attr(tag)
+        case None => None
+      }
+    }
+  }
+  
+  /**
+   * Find Exif IFD attribute without checking if there is an Exif IFD at all.
+   * @param tag Attribute tag.
+   * @return Option containing the attribute or *None*.
+   */
+  def attr(tag: ExifTag): Option[IfdAttribute[ExifTag]] = exifIfd match {
+    case Some(ifd) => ifd.attr(tag)
+    case None => None
+  }
+  
+  /**
+   * Find GPS attribute without checking if there is a GPS IFD at all.
+   * @param tag Attribute tag.
+   * @return Option containing the attribute or *None*.
+   */
+  def attr(tag: GpsTag): Option[IfdAttribute[GpsTag]] = gpsIfd match {
+    case Some(ifd) => ifd.attr(tag)
+    case None => None
+  }
+  
   override def toString() = {
     val opt2string = (opt: Option[_]) => opt match {
       case Some(obj) => obj.toString()

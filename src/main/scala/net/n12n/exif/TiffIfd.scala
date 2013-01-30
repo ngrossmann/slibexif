@@ -27,9 +27,11 @@ package net.n12n.exif
  */
 class TiffIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, TiffIfd.marker2tag)
 
-object TiffIfd {
-  case class TiffTag(marker: Int, name: String) extends Tag
-  
+case class TiffTag(marker: Int, name: String) extends Tag
+
+object TiffIfd extends IfdObjectBase[TiffTag]{
+  override protected val tag = (marker: Int, name: String) => TiffTag(marker, name)
+
   val ImageWidth = TiffTag(256, "ImageWidth")
   val ImageLength = TiffTag(257, "ImageLength")
   val BitsPerSample = TiffTag(258, "BitsPerSample")
@@ -68,10 +70,5 @@ object TiffIfd {
     ExifIfdPointer, GpsInfoIfdPointer, XResolution, YResolution, ResolutionUnit, StripOffsets, 
     RowsPerStrip, StripByteCounts, JPEGInterchangeFormat, JPEGInterchangeFormatLength, 
     TransferFunction, WhitePoint, PrimaryChromaticities, YCbCrCoefficients, ReferenceBlackWhite, 
-    DateTime, ImageDescription, Make, Model, Software, Artist, Copyright)
-  
-  def marker2tag(id: Int): TiffTag = Tags.find(_.marker == id) match {
-    case Some(t) => t
-    case None => TiffTag(id, "TiffTag")
-  }
+    DateTime, ImageDescription, Make, Model, Software, Artist, Copyright)  
 }

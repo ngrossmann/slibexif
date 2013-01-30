@@ -19,10 +19,10 @@
  */
 package net.n12n.exif
 
-class Rational(val numerator: Long, val denominator: Long) {
+case class Rational(val numerator: Long, val denominator: Long) {
   override def toString = numerator + "/" + denominator
 }
 
-class SignedRational(val numerator: Int, val denominator: Int) {
+case class SignedRational(val numerator: Int, val denominator: Int) {
   override def toString = numerator + "/" + denominator
 }

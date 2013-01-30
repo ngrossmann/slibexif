@@ -59,7 +59,7 @@ object IfdAttribute {
   }
 }
 
-abstract class IfdAttribute[T <: Tag](val tag: T, val tagType: Type, val count: Int, 
+abstract class IfdAttribute[+T <: Tag](val tag: T, val tagType: Type, val count: Int, 
     val data: ByteSeq) {
   type V
   require(tagType.size * count == data.length)

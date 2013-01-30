@@ -39,16 +39,28 @@ class JpegMetaDataTest extends FunSuite {
       case None => -1
     }
   }
-  
-  test("toString") {
-    val metadata = load("image.jpg")
-    println(metadata)
-  }
-  
+    
   test("GPS Data") {
-    println(load("image-gps.jpg"))
+    val metadata = load("image-gps.jpg")
+    metadata.exif match {
+      case Some(exif) => exif.attr(GpsIfd.GPSLatitude) match {
+        case Some(attr: RationalIFD[_]) => 
+          assert(attr.value.length === 3)
+          assert(attr.value(0) === Rational(48, 1))
+        case None => fail("GPSLatitude not found")
+      }
+      case None => fail("Exif segment not found")
+    }
   }
   
+  expect(64, "All Attributes found") {
+    val metadata = load("image-gps.jpg")
+    metadata.exif match {
+      case Some(exif) => exif.allAttrs.length
+      case None => fail("Exif segment not found")
+    }
+  }
+
   private def load(file: String) = {
     try {
       new JpegMetaData(classOf[JpegMetaData].getResourceAsStream(file))
