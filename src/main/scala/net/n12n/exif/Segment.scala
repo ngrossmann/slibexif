@@ -37,7 +37,7 @@ object Segment {
       SofMarker, SosMarker, EoiMarker, ComMarker)
   
   def create(marker: ByteSeq, in: ByteStream): Segment = {
-    val markerValue = marker.toShort(0, ByteSeq.BigEndian)
+    val markerValue = marker.toShort(0, ByteOrder.BigEndian)
     val tag = Markers.find(_.marker == markerValue) match {
       case Some(t) => t
       case None => Marker(markerValue, "Unknown Marker")

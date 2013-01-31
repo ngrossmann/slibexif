@@ -45,16 +45,16 @@ class ByteSeqTest extends FunSuite {
   }
   
   expect(0x01000000, "toInt LittleEndian") {
-    bseq.toSignedLong(0, ByteSeq.LittleEndian) 
+    bseq.toSignedLong(0, ByteOrder.LittleEndian) 
   }
   
   expect(0x01, "toInt BigEndian") {
-    bseq.toSignedLong(0, ByteSeq.BigEndian) 
+    bseq.toSignedLong(0, ByteOrder.BigEndian) 
   }
   
   expect(42, "Signed short") {
     val order = new ByteSeq(Array(0x4d, 0x4d))
     val marker = new ByteSeq(Array(0x00, 0x2a))
-    marker.toSignedShort(0, order)
+    marker.toSignedShort(0, ByteOrder.BigEndian)
   }
 }

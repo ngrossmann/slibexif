@@ -23,6 +23,8 @@ object ExifSegment {
   val DefaultOrientation: Short = 1
   /** Marker in Tiff header. */
   private[ExifSegment] val tiffMarker = 42
+  private[ExifSegment] val LittleEndianMarker = ByteSeq("II")
+  private[ExifSegment] val BigEndianMarker = ByteSeq("MM")
   
   /**
    * List attributes in optional IFD.
@@ -47,7 +49,8 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
   import ExifSegment._
   val tiffOffset = offset + 6
   private val name = data.zstring(offset);
-  val byteOrder = data.slice(tiffOffset, tiffOffset + 2)
+  val byteOrder = if (data.slice(tiffOffset, tiffOffset + 2) == LittleEndianMarker) 
+    ByteOrder.LittleEndian else ByteOrder.BigEndian 
   if (data.toSignedShort(tiffOffset + 2, byteOrder) != tiffMarker)
     throw new IllegalArgumentException("Not an EXIF segment TIFF marker not found(%d)".format(
         data.toSignedShort(tiffOffset + 2, byteOrder)))

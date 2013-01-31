@@ -21,8 +21,9 @@
 package net.n12n.exif
 
 object ByteSeq {
-  val LittleEndian = ByteSeq("II")
-  val BigEndian = ByteSeq("MM")
+  
+  //val LittleEndian = ByteSeq("II")
+  //val BigEndian = ByteSeq("MM")
   
   def apply(len: Int, in: Iterator[Int]): ByteSeq = {
     val a = new Array[Byte](len)
@@ -42,6 +43,7 @@ object ByteSeq {
  * A sequence of bytes which may be converted to different types.
  */
 class ByteSeq(a: Array[Byte]) {
+  import ByteOrder._
   private val array = a
   val length = array.length
   
@@ -56,22 +58,24 @@ class ByteSeq(a: Array[Byte]) {
   
   def slice(start:Int, end:Int) = new ByteSeq(array.slice(start, end))
   
-  def toShort(offset: Int, byteOrder: ByteSeq) = toNumber(offset, byteOrder, Type.Short.size).toInt
+  def toShort(offset: Int, byteOrder: ByteOrder) = toNumber(offset, byteOrder, Type.Short.size).toInt
   
-  def toSignedShort(offset: Int, byteOrder: ByteSeq) = 
+  def toSignedShort(offset: Int, byteOrder: ByteOrder) = 
     toNumber(offset, byteOrder, Type.Short.size).toShort
   
-  def toLong(offset: Int, byteOrder: ByteSeq) = toNumber(offset, byteOrder, Type.Long.size)
-  def toSignedLong(offset: Int, byteOrder: ByteSeq) = 
+  def toLong(offset: Int, byteOrder: ByteOrder) = toNumber(offset, byteOrder, Type.Long.size)
+  
+  def toSignedLong(offset: Int, byteOrder: ByteOrder) = 
     toNumber(offset, byteOrder, Type.Long.size).toInt
-  def toRational(offset: Int, byteOrder: ByteSeq) = 
+  
+  def toRational(offset: Int, byteOrder: ByteOrder) = 
     new Rational(toLong(offset, byteOrder), toLong(offset + Type.Long.size, byteOrder))
   
-  def toSignedRational(offset: Int, byteOrder: ByteSeq) = 
+  def toSignedRational(offset: Int, byteOrder: ByteOrder) = 
     new SignedRational(toSignedLong(offset, byteOrder), toSignedLong(offset + Type.Long.size, byteOrder))
   
-  private def toNumber(offset: Int, byteOrder: ByteSeq, size: Int): Long = {
-    val offsets = if (byteOrder == ByteSeq.LittleEndian) (offset until offset + size).reverse 
+  private def toNumber(offset: Int, byteOrder: ByteOrder, size: Int): Long = {
+    val offsets = if (byteOrder == ByteOrder.LittleEndian) (offset until offset + size).reverse 
       else (offset until offset + size)  
     val values = offsets.map(bytes(_)).map(toLong(_)) // Values in big-endian order
     values.reduceLeft((n, m) => (n << 8) + m)
