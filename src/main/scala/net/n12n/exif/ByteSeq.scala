@@ -22,9 +22,6 @@ package net.n12n.exif
 
 object ByteSeq {
   
-  //val LittleEndian = ByteSeq("II")
-  //val BigEndian = ByteSeq("MM")
-  
   def apply(len: Int, in: Iterator[Int]): ByteSeq = {
     val a = new Array[Byte](len)
     for (i <- 0 until len)
@@ -58,12 +55,12 @@ class ByteSeq(a: Array[Byte]) {
   
   def slice(start:Int, end:Int) = new ByteSeq(array.slice(start, end))
   
-  def toShort(offset: Int, byteOrder: ByteOrder) = toNumber(offset, byteOrder, Type.Short.size).toInt
+  def toShort(offset: Int, byteOrder: ByteOrder): Int = toNumber(offset, byteOrder, Type.Short.size).toInt
   
   def toSignedShort(offset: Int, byteOrder: ByteOrder) = 
     toNumber(offset, byteOrder, Type.Short.size).toShort
   
-  def toLong(offset: Int, byteOrder: ByteOrder) = toNumber(offset, byteOrder, Type.Long.size)
+  def toLong(offset: Int, byteOrder: ByteOrder): Long = toNumber(offset, byteOrder, Type.Long.size)
   
   def toSignedLong(offset: Int, byteOrder: ByteOrder) = 
     toNumber(offset, byteOrder, Type.Long.size).toInt
@@ -83,8 +80,8 @@ class ByteSeq(a: Array[Byte]) {
   
   private def toLong(byte: Byte): Long = if (byte >= 0)  byte.toLong else 0x100L + byte
   
-  override def toString() = "[" + array.map((b) => (if (b < 0) 256 + b else b.toInt).toHexString).mkString(" ") +
-    "]"
+  override def toString() = "[" + array.map(
+      (b) => (if (b < 0) 256 + b else b.toInt).toHexString).mkString(" ") + "]"
   
   /**
    * Read a zero terminated string.

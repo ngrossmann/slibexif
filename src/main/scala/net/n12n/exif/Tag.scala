@@ -31,3 +31,4 @@ abstract class Tag {
   
   override def toString() = "%s(%04x)".format(name, marker)
 }
+

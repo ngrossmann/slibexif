@@ -43,7 +43,7 @@ class JpegMetaDataTest extends FunSuite {
   test("GPS Data") {
     val metadata = load("image-gps.jpg")
     metadata.exif match {
-      case Some(exif) => exif.attr(GpsIfd.GPSLatitude) match {
+      case Some(exif) => exif.findAttr(GpsIfd.GPSLatitude) match {
         case Some(attr: RationalIFD[_]) => 
           assert(attr.value.length === 3)
           assert(attr.value(0) === Rational(48, 1))

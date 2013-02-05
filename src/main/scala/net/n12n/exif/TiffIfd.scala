@@ -32,40 +32,40 @@ case class TiffTag(marker: Int, name: String) extends Tag
 object TiffIfd extends IfdObjectBase[TiffTag]{
   override protected val tag = (marker: Int, name: String) => TiffTag(marker, name)
 
-  val ImageWidth = TiffTag(256, "ImageWidth")
-  val ImageLength = TiffTag(257, "ImageLength")
-  val BitsPerSample = TiffTag(258, "BitsPerSample")
-  val Compression = TiffTag(259, "Compression")
-  val PhotometricInterpretation = TiffTag(262, "PhotometricInterpretation")
-  val Orientation = TiffTag(274, "Orientation")
-  val SamplesPerPixel = TiffTag(277, "SamplesPerPixel")
-  val PlanarConfiguration = TiffTag(284, "PlanarConfiguration")
-  val YCbCrSubSampling = TiffTag(530, "YCbCrSubSampling")
-  val YCbCrPositioning = TiffTag(531, "YCbCrPositioning")
-  val ExifIfdPointer = TiffTag(0x8769, "ExifIfdPointer")
-  val GpsInfoIfdPointer = TiffTag(0x8825, "GpsInfoIfdPointer")
-  val XResolution = TiffTag(282, "XResolution")
-  val YResolution = TiffTag(283, "YResolution")
-  val ResolutionUnit = TiffTag(296, "ResolutionUnit")
-  val StripOffsets = TiffTag(273, "StripOffsets")
-  val RowsPerStrip = TiffTag(278, "RowsPerStrip")
-  val StripByteCounts = TiffTag(279, "StripByteCounts")
-  val JPEGInterchangeFormat = TiffTag(513, "JPEGInterchangeFormat")
-  val JPEGInterchangeFormatLength = TiffTag(514, "JPEGInterchangeFormatLength")
-  val TransferFunction = TiffTag(301, "TransferFunction")
-  val WhitePoint = TiffTag(318, "WhitePoint")
-  val PrimaryChromaticities = TiffTag(319, "PrimaryChromaticities")
-  val YCbCrCoefficients = TiffTag(529, "YCbCrCoefficients")
-  val ReferenceBlackWhite = TiffTag(532, "ReferenceBlackWhite")
-  val DateTime = TiffTag(306, "DateTime")
-  val ImageDescription = TiffTag(270, "ImageDescription")
-  val Make = TiffTag(271, "Make")
-  val Model = TiffTag(272, "Model")
-  val Software = TiffTag(305, "Software")
-  val Artist = TiffTag(315, "Artist")
-  val Copyright = TiffTag(33432, "Copyright")
+  val ImageWidth = new TiffTag(256, "ImageWidth") with NumericTag
+  val ImageLength = new TiffTag(257, "ImageLength") with NumericTag
+  val BitsPerSample = new TiffTag(258, "BitsPerSample") with ShortListTag
+  val Compression = new TiffTag(259, "Compression") with ShortTag
+  val PhotometricInterpretation = new TiffTag(262, "PhotometricInterpretation") with ShortTag
+  val Orientation = new TiffTag(274, "Orientation") with ShortTag
+  val SamplesPerPixel = new TiffTag(277, "SamplesPerPixel") with ShortTag
+  val PlanarConfiguration = new TiffTag(284, "PlanarConfiguration") with ShortTag
+  val YCbCrSubSampling = new TiffTag(530, "YCbCrSubSampling") with ShortListTag
+  val YCbCrPositioning = new TiffTag(531, "YCbCrPositioning") with ShortTag
+  val ExifIfdPointer = new TiffTag(0x8769, "ExifIfdPointer") with LongTag
+  val GpsInfoIfdPointer = new TiffTag(0x8825, "GpsInfoIfdPointer") with LongTag
+  val XResolution = new TiffTag(282, "XResolution") with RationalTag
+  val YResolution = new TiffTag(283, "YResolution") with RationalTag
+  val ResolutionUnit = new TiffTag(296, "ResolutionUnit") with ShortTag
+  val StripOffsets = new TiffTag(273, "StripOffsets") with NumericListTag
+  val RowsPerStrip = new TiffTag(278, "RowsPerStrip") with NumericTag
+  val StripByteCounts = new TiffTag(279, "StripByteCounts")  with NumericListTag
+  val JPEGInterchangeFormat = new TiffTag(513, "JPEGInterchangeFormat") with LongTag
+  val JPEGInterchangeFormatLength = new TiffTag(514, "JPEGInterchangeFormatLength") with LongTag
+  val TransferFunction = new TiffTag(301, "TransferFunction") with ShortListTag
+  val WhitePoint = new TiffTag(318, "WhitePoint") with RationalListTag
+  val PrimaryChromaticities = new TiffTag(319, "PrimaryChromaticities") with RationalListTag
+  val YCbCrCoefficients = new TiffTag(529, "YCbCrCoefficients") with RationalListTag
+  val ReferenceBlackWhite = new TiffTag(532, "ReferenceBlackWhite") with RationalListTag
+  val DateTime = new TiffTag(306, "DateTime") with AsciiTag
+  val ImageDescription = new TiffTag(270, "ImageDescription") with AsciiTag
+  val Make = new TiffTag(271, "Make") with AsciiTag
+  val Model = new TiffTag(272, "Model") with AsciiTag
+  val Software = new TiffTag(305, "Software") with AsciiTag
+  val Artist = new TiffTag(315, "Artist") with AsciiTag
+  val Copyright = new TiffTag(33432, "Copyright") with AsciiTag
   
-  val Tags = Set(ImageWidth, ImageLength, BitsPerSample, Compression, PhotometricInterpretation,
+  val Tags = Set[TiffTag](ImageWidth, ImageLength, BitsPerSample, Compression, PhotometricInterpretation,
     Orientation, SamplesPerPixel, PlanarConfiguration, YCbCrSubSampling, YCbCrPositioning,
     ExifIfdPointer, GpsInfoIfdPointer, XResolution, YResolution, ResolutionUnit, StripOffsets, 
     RowsPerStrip, StripByteCounts, JPEGInterchangeFormat, JPEGInterchangeFormatLength, 

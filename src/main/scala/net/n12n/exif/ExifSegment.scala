@@ -22,7 +22,7 @@ package net.n12n.exif
 object ExifSegment {
   val DefaultOrientation: Short = 1
   /** Marker in Tiff header. */
-  private[ExifSegment] val tiffMarker = 42
+  private[ExifSegment] val TiffMarker = 42
   private[ExifSegment] val LittleEndianMarker = ByteSeq("II")
   private[ExifSegment] val BigEndianMarker = ByteSeq("MM")
   
@@ -51,7 +51,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
   private val name = data.zstring(offset);
   val byteOrder = if (data.slice(tiffOffset, tiffOffset + 2) == LittleEndianMarker) 
     ByteOrder.LittleEndian else ByteOrder.BigEndian 
-  if (data.toSignedShort(tiffOffset + 2, byteOrder) != tiffMarker)
+  if (data.toSignedShort(tiffOffset + 2, byteOrder) != TiffMarker)
     throw new IllegalArgumentException("Not an EXIF segment TIFF marker not found(%d)".format(
         data.toSignedShort(tiffOffset + 2, byteOrder)))
   private val ifdOffset = data.toSignedLong(tiffOffset + 4, byteOrder)
@@ -97,11 +97,11 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def attr(tag: TiffTag): Option[IfdAttribute[TiffTag]] = {
-    ifd0.attr(tag) match {
+  def findAttr(tag: TiffTag): Option[IfdAttribute[TiffTag]] = {
+    ifd0.findAttr(tag) match {
       case Some(tag) => Some(tag)
       case None => ifd1 match {
-        case Some(ifd) => ifd.attr(tag)
+        case Some(ifd) => ifd.findAttr(tag)
         case None => None
       }
     }
@@ -112,8 +112,8 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def attr(tag: ExifTag): Option[IfdAttribute[ExifTag]] = exifIfd match {
-    case Some(ifd) => ifd.attr(tag)
+  def findAttr(tag: ExifTag): Option[IfdAttribute[ExifTag]] = exifIfd match {
+    case Some(ifd) => ifd.findAttr(tag)
     case None => None
   }
   
@@ -122,8 +122,8 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def attr(tag: GpsTag): Option[IfdAttribute[GpsTag]] = gpsIfd match {
-    case Some(ifd) => ifd.attr(tag)
+  def findAttr(tag: GpsTag): Option[IfdAttribute[GpsTag]] = gpsIfd match {
+    case Some(ifd) => ifd.findAttr(tag)
     case None => None
   }
   

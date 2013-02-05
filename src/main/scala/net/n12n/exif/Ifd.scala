@@ -30,10 +30,38 @@ class Ifd[T <: Tag](exif: ExifSegment, offset: Int, bytes2tag: (Int) => T) {
   val tags: Seq[IfdAttribute[T]] = for (i <- 0 until count) yield 
     IfdAttribute(exif.data, offset + 2 + i * IfdAttribute.Length, exif.tiffOffset, exif.byteOrder,
         bytes2tag)
+  /**
+   * Offset to next IDF relative to the Exif's TiffHeader.
+   */
   val nextIfd = exif.data.toSignedLong(exif.tiffOffset + offset + 2 + count * IfdAttribute.Length,
       exif.byteOrder)
   
-  def attr(tag: T): Option[IfdAttribute[T]] = tags.find(_.tag == tag)
+  /**
+   * Find attribute in IFD.
+   * @param tag Attribute tag.
+   * @return {{Some(attr)}} or {{None}}.
+   */
+  def findAttr(tag: T): Option[IfdAttribute[T]] = tags.find(_.tag == tag)
+  
+  /**
+   * Get attribute by tag.
+   * @param tag Attribute's tag.
+   * @return Attribute.
+   * @throws AttributeNotFoundException If the attribute was not found in this IFD.
+   */
+  def attr(tag: T): IfdAttribute[T] = findAttr(tag).getOrElse(throw AttributeNotFoundException(tag.name))
+  
+  /**
+   * Get attribute value by tag.
+   * @param tag Tag
+   * @return Attribute value
+   * @throws AttributeNotFoundException If the attribute was not found in this IFD.
+   */
+  def value[V](tag: TypedTag[V]): V = {
+    val ifdAttr: IfdAttribute[_] = tags.find(_.tag == tag).getOrElse(
+        throw AttributeNotFoundException(tag.name))
+    tag.value(ifdAttr, exif.byteOrder)
+  }
   
   override def toString() = "IFD(%x, %x)\n%s".format(count, nextIfd, tags.mkString("  \n"))
 }

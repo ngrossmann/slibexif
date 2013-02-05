@@ -25,43 +25,43 @@ package net.n12n.exif
  */
 class GpsIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, GpsIfd.marker2tag)
 
-case class GpsTag(marker: Int, name: String) extends Tag
+case class GpsTag(val marker: Int, val name: String) extends Tag
 
 object GpsIfd extends IfdObjectBase[GpsTag] {
-  override val tag = (marker: Int, name: String) => GpsTag(marker, name)
+  override val tag = (marker: Int, name: String) => new GpsTag(marker, name)
   
-  val GPSVersionID = GpsTag(0, "GPSVersionID")
-  val GPSLatitudeRef = GpsTag(1, "GPSLatitudeRef")
-  val GPSLatitude = GpsTag(2, "GPSLatitude")
-  val GPSLongitudeRef = GpsTag(3, "GPSLongitudeRef")
-  val GPSLongitude = GpsTag(4, "GPSLongitude")
-  val GPSAltitudeRef = GpsTag(5, "GPSAltitudeRef")
-  val GPSAltitude = GpsTag(6, "GPSAltitude")
-  val GPSTimeStamp = GpsTag(7, "GPSTimeStamp")
-  val GPSSatellites = GpsTag(8, "GPSSatellites")
-  val GPSStatus = GpsTag(9, "GPSStatus")
-  val GPSMeasureMode = GpsTag(10, "GPSMeasureMode")
-  val GPSDOP = GpsTag(11, "GPSDOP")
-  val GPSSpeedRef = GpsTag(12, "GPSSpeedRef")
-  val GPSSpeed = GpsTag(13, "GPSSpeed")
-  val GPSTrackRef = GpsTag(14, "GPSTrackRef")
-  val GPSTrack = GpsTag(15, "GPSTrack")
-  val GPSImgDirectionRef = GpsTag(16, "GPSImgDirectionRef")
-  val GPSImgDirection = GpsTag(17, "GPSImgDirection")
-  val GPSMapDatum = GpsTag(18, "GPSMapDatum")
-  val GPSDestLatitudeRef = GpsTag(19, "GPSDestLatitudeRef")
-  val GPSDestLatitude = GpsTag(20, "GPSDestLatitude")
-  val GPSDestLongitudeRef = GpsTag(21, "GPSDestLongitudeRef")
-  val GPSDestLongitude = GpsTag(22, "GPSDestLongitude")
-  val GPSDestBearingRef = GpsTag(23, "GPSDestBearingRef")
-  val GPSDestBearing = GpsTag(24, "GPSDestBearing")
-  val GPSDestDistanceRef = GpsTag(25, "GPSDestDistanceRef")
-  val GPSDestDistance = GpsTag(26, "GPSDestDistance")
-  val GPSProcessingMethod = GpsTag(27, "GPSProcessingMethod")
-  val GPSAreaInformation = GpsTag(28, "GPSAreaInformation")
-  val GPSDateStamp = GpsTag(29, "GPSDateStamp")
-  val GPSDifferential = GpsTag(30, "GPSDifferential")
-  override val Tags = Set(GPSVersionID,
+  val GPSVersionID = new GpsTag(0, "GPSVersionID") with ByteTag
+  val GPSLatitudeRef = new GpsTag(1, "GPSLatitudeRef") with AsciiTag
+  val GPSLatitude = new GpsTag(2, "GPSLatitude") with RationalListTag
+  val GPSLongitudeRef = new GpsTag(3, "GPSLongitudeRef") with AsciiTag
+  val GPSLongitude = new GpsTag(4, "GPSLongitude") with RationalListTag
+  val GPSAltitudeRef = new GpsTag(5, "GPSAltitudeRef") with ByteTag
+  val GPSAltitude = new GpsTag(6, "GPSAltitude") with RationalTag
+  val GPSTimeStamp = new GpsTag(7, "GPSTimeStamp") with RationalListTag
+  val GPSSatellites = new GpsTag(8, "GPSSatellites") with AsciiTag
+  val GPSStatus = new GpsTag(9, "GPSStatus") with AsciiTag
+  val GPSMeasureMode = new GpsTag(10, "GPSMeasureMode") with AsciiTag
+  val GPSDOP = new GpsTag(11, "GPSDOP") with RationalTag
+  val GPSSpeedRef = new GpsTag(12, "GPSSpeedRef") with AsciiTag
+  val GPSSpeed = new GpsTag(13, "GPSSpeed") with RationalTag
+  val GPSTrackRef = new GpsTag(14, "GPSTrackRef") with AsciiTag
+  val GPSTrack = new GpsTag(15, "GPSTrack") with RationalTag
+  val GPSImgDirectionRef = new GpsTag(16, "GPSImgDirectionRef") with AsciiTag
+  val GPSImgDirection = new GpsTag(17, "GPSImgDirection") with RationalTag
+  val GPSMapDatum = new GpsTag(18, "GPSMapDatum") with AsciiTag
+  val GPSDestLatitudeRef = new GpsTag(19, "GPSDestLatitudeRef") with AsciiTag
+  val GPSDestLatitude = new GpsTag(20, "GPSDestLatitude") with RationalListTag
+  val GPSDestLongitudeRef = new GpsTag(21, "GPSDestLongitudeRef") with AsciiTag
+  val GPSDestLongitude = new GpsTag(22, "GPSDestLongitude") with RationalListTag
+  val GPSDestBearingRef = new GpsTag(23, "GPSDestBearingRef") with AsciiTag
+  val GPSDestBearing = new GpsTag(24, "GPSDestBearing") with RationalListTag
+  val GPSDestDistanceRef = new GpsTag(25, "GPSDestDistanceRef") with AsciiTag
+  val GPSDestDistance = new GpsTag(26, "GPSDestDistance") with RationalTag
+  val GPSProcessingMethod = new GpsTag(27, "GPSProcessingMethod") with UndefinedTag
+  val GPSAreaInformation = new GpsTag(28, "GPSAreaInformation") with UndefinedTag
+  val GPSDateStamp = new GpsTag(29, "GPSDateStamp") with AsciiTag
+  val GPSDifferential = new GpsTag(30, "GPSDifferential") with ShortTag
+  override val Tags = Set[GpsTag](GPSVersionID,
     GPSLatitudeRef,
     GPSLatitude,
     GPSLongitudeRef,
