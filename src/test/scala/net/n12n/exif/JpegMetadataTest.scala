@@ -29,7 +29,7 @@ class JpegMetaDataTest extends FunSuite {
     val metadata = load("image.jpg")
     assert(metadata.exif != None, "Exif tag found")
   }
-
+    
   expect(8, "Orientation") {
     val metadata = load("image-vertical.jpg")
     metadata.exif match {
@@ -39,7 +39,7 @@ class JpegMetaDataTest extends FunSuite {
       case None => -1
     }
   }
-    
+  
   test("GPS Data") {
     val metadata = load("image-gps.jpg")
     metadata.exif match {

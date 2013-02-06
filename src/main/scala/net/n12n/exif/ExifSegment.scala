@@ -31,7 +31,7 @@ object ExifSegment {
    * @param opt Optional IFD.
    * @return Attributes or an empty list.
    */
-  def listAttrs[T <: Tag](opt: Option[Ifd[T]]): List[IfdAttribute[T]] = opt match {
+  def listAttrs(opt: Option[Ifd]): List[IfdAttribute[Tag]] = opt match {
     case Some(ifd) => ifd.tags.toList
     case None => Nil
   }
@@ -56,9 +56,9 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
         data.toSignedShort(tiffOffset + 2, byteOrder)))
   private val ifdOffset = data.toSignedLong(tiffOffset + 4, byteOrder)
   /** The 0th IFD, always present. */
-  val ifd0 = new TiffIfd(this, ifdOffset)
+  val ifd0: TiffIfd = new TiffIfd(this, ifdOffset, "IFD0")
   /** Optional 1st IFD. */
-  val ifd1: Option[TiffIfd] = if (ifd0.nextIfd != 0) Some(new TiffIfd(this, ifd0.nextIfd)) else None
+  val ifd1: Option[TiffIfd] = if (ifd0.nextIfd != 0) Some(new TiffIfd(this, ifd0.nextIfd, "IFD1")) else None
   /** Optional Exif IFD. */
   val exifIfd: Option[ExifIfd] = ifd0.tags.find(_.tag == TiffIfd.ExifIfdPointer) match {
     case Some(pointer: LongIFD[_]) => Some(new ExifIfd(this, pointer.value.head.toInt))
@@ -69,6 +69,9 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
     case Some(pointer: LongIFD[_]) => Some(new GpsIfd(this, pointer.value.head.toInt))
     case None => None
   }
+  /** List of all IFDs in this Exif segment. */
+  lazy val ifds = ifd0 :: ifd1.toList ::: exifIfd.toList ::: gpsIfd.toList
+  
   /** List of all attributes of all IFDs of this segment. */
   lazy val allAttrs: List[IfdAttribute[Tag]] = ifd0.tags.toList ::: listAttrs(ifd1) ::: 
     listAttrs(exifIfd) ::: listAttrs(gpsIfd)

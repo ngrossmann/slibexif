@@ -22,7 +22,14 @@ package net.n12n.exif
 import java.io.InputStream
 import scala.io.BufferedSource
 import java.lang.{IllegalArgumentException, IllegalStateException}
-
+import java.io.FileInputStream
+object JpegMetaData {
+  /**
+   * Read image from file.
+   * @param file filename.
+   */
+  def apply(file: String): JpegMetaData = new JpegMetaData(new FileInputStream(file))
+}
 /**
  * Read JPEG from byte stream.
  * 
@@ -36,16 +43,17 @@ class JpegMetaData(data: InputStream) {
   if (SoiMarker != soi) throw new IllegalArgumentException("Not a JPEG image, expected " + SoiMarker +
     " found " + soi)
   val segments = parseSegments(in)
-    
-  val comment = segments.find(_.marker == Segment.ComMarker) match {
-    case Some(seg: ComSegment) => seg.comment
-    case None => ""
-  }
+  /** List of comment segments */
+  val comments = segments.filter(_.marker == Segment.ComMarker)
   
   val exif: Option[ExifSegment] = segments.find(_.isInstanceOf[ExifSegment]) match {
     case Some(exif: ExifSegment) => Some(exif)
     case _ => None
   }
+  /**
+   * Total size of the image.
+   */
+  lazy val size = segments.map(_.length).sum + SoiMarker.length + SosMarker.length
   
   /**
    * JPEG meta-data as string.

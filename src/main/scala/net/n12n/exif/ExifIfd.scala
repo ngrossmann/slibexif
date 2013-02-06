@@ -25,12 +25,16 @@ package net.n12n.exif
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].
  */
-class ExifIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, ExifIfd.marker2tag)
+class ExifIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "Exif IFD") {
+  override type T = ExifTag
+  override val Tags = ExifIfd.Tags
+  override protected def createTag(marker: Int) = 
+    ExifTag(marker, "Unknown Exif Tag %04x".format(marker))
+}
 
 case class ExifTag(marker: Int, name: String) extends Tag
 
-object ExifIfd extends IfdObjectBase[ExifTag] {
-  override protected val tag = (marker: Int, name: String) => ExifTag(marker, name)
+object ExifIfd {
   
   val PixelXDimension = new ExifTag(40962, "PixelXDimension") with NumericTag
   val PixelYDimension = new ExifTag(40963, "PixelYDimension") with NumericTag
@@ -38,6 +42,7 @@ object ExifIfd extends IfdObjectBase[ExifTag] {
   val CompressedBitsPerPixel = new ExifTag(37122, "CompressedBitsPerPixel") with RationalTag
   val ExifVersion = new ExifTag(36864, "ExifVersion") with UndefinedTag
   val FlashpixVersion = new ExifTag(40960, "FlashpixVersion") with UndefinedTag
+  val ColorSpace = new ExifTag(40961, "ColorSpace") with ShortTag
   val MakerNote = new ExifTag(37500, "MakerNote") with UndefinedTag
   val UserComment = new ExifTag(37510, "UserComment") with UndefinedTag
   val RelatedSoundFile = new ExifTag(40964, "RelatedSoundFile") with AsciiTag
@@ -89,9 +94,9 @@ object ExifIfd extends IfdObjectBase[ExifTag] {
   val DeviceSettingDescription = new ExifTag(41995, "DeviceSettingDescription") with UndefinedTag
   val SubjectDistanceRange = new ExifTag(41996, "SubjectDistanceRange") with ShortTag
   
-  override val Tags = Set[ExifTag](PixelXDimension, PixelYDimension,
-    ComponentsConfiguration, CompressedBitsPerPixel, ExifVersion, FlashpixVersion, MakerNote,
-    UserComment, RelatedSoundFile, DateTimeOriginal, DateTimeDigitized, SubSecTime,
+  val Tags = Set[ExifTag](PixelXDimension, PixelYDimension,
+    ComponentsConfiguration, CompressedBitsPerPixel, ExifVersion, FlashpixVersion, ColorSpace,
+    MakerNote, UserComment, RelatedSoundFile, DateTimeOriginal, DateTimeDigitized, SubSecTime,
     SubSecTimeOriginal, SubSecTimeDigitized, ImageUniqueID,
     ExposureTime, FNumber, ExposureProgram, SpectralSensitivity, ISOSpeedRatings, OECF,
     ShutterSpeedValue, ApertureValue, BrightnessValue, ExposureBiasValue, MaxApertureValue,

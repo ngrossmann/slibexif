@@ -25,15 +25,18 @@ package net.n12n.exif
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].
  */
-class Ifd[T <: Tag](exif: ExifSegment, offset: Int, bytes2tag: (Int) => T) {
+abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
+  type T <: Tag
+  /** Set of tags. */
+  val Tags: Set[T]
   val count = exif.data.toShort(exif.tiffOffset + offset, exif.byteOrder)
-  val tags: Seq[IfdAttribute[T]] = for (i <- 0 until count) yield 
+  lazy val tags: Seq[IfdAttribute[T]] = for (i <- 0 until count) yield 
     IfdAttribute(exif.data, offset + 2 + i * IfdAttribute.Length, exif.tiffOffset, exif.byteOrder,
         bytes2tag)
   /**
    * Offset to next IDF relative to the Exif's TiffHeader.
    */
-  val nextIfd = exif.data.toSignedLong(exif.tiffOffset + offset + 2 + count * IfdAttribute.Length,
+  lazy val nextIfd = exif.data.toSignedLong(exif.tiffOffset + offset + 2 + count * IfdAttribute.Length,
       exif.byteOrder)
   
   /**
@@ -62,6 +65,11 @@ class Ifd[T <: Tag](exif: ExifSegment, offset: Int, bytes2tag: (Int) => T) {
         throw AttributeNotFoundException(tag.name))
     tag.value(ifdAttr, exif.byteOrder)
   }
+
+  protected def bytes2tag(id: Int): T = 
+    Tags.find(_.marker == id).getOrElse(createTag(id))
+  
+  protected def createTag(id: Int): T
   
   override def toString() = "IFD(%x, %x)\n%s".format(count, nextIfd, tags.mkString("  \n"))
 }

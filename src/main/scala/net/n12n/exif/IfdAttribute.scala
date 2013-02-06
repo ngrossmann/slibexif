@@ -101,6 +101,12 @@ class LongIFD[T <: Tag](tag: T, count: Int, data: ByteSeq, order: ByteOrder)
   val value: Seq[Long] = for (i <- 0 until count) yield data.toLong(i * tagType.size, order)
 }
 
+class LongIFD2[T <: Tag](tag: T, count: Int, data: ByteSeq, order: ByteOrder)
+  extends IfdAttribute(tag, Type.Long, count, data) {
+  type V = Seq[Long]
+  val value: Seq[Long] = for (i <- 0 until count) yield data.toLong(i * tagType.size, order)
+}
+
 class RationalIFD[T <: Tag](tag: T, count: Int, data: ByteSeq, order: ByteOrder)
   extends IfdAttribute(tag, Type.Rational, count, data) {
   type V = Seq[Rational]

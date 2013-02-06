@@ -25,13 +25,15 @@ package net.n12n.exif
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].
  */
-class TiffIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, TiffIfd.marker2tag)
+class TiffIfd(exif: ExifSegment, offset: Int, name: String) extends Ifd(exif, offset, name) {
+  override type T = TiffTag
+  override val Tags = TiffIfd.Tags
+  override protected def createTag(marker: Int) = TiffTag(marker, "Unknown Tiff Tag")
+}
 
 case class TiffTag(marker: Int, name: String) extends Tag
 
-object TiffIfd extends IfdObjectBase[TiffTag]{
-  override protected val tag = (marker: Int, name: String) => TiffTag(marker, name)
-
+object TiffIfd {
   val ImageWidth = new TiffTag(256, "ImageWidth") with NumericTag
   val ImageLength = new TiffTag(257, "ImageLength") with NumericTag
   val BitsPerSample = new TiffTag(258, "BitsPerSample") with ShortListTag
