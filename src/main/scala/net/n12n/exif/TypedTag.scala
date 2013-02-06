@@ -27,35 +27,35 @@ import ByteOrder._
  *
  */
 trait TypedTag[T] extends Tag {
-  def value(attr: IfdAttribute[_], order: ByteOrder): T
+  def value(attr: IfdAttribute, order: ByteOrder): T
 }
 
 trait ByteTag extends TypedTag[ByteSeq] {
   val tagType = Type.Byte
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = attr.data
+  override def value(attr: IfdAttribute, order: ByteOrder) = attr.data
 }
 
 trait UndefinedTag extends TypedTag[ByteSeq] {
   val tagType = Type.Undefined
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = attr.data
+  override def value(attr: IfdAttribute, order: ByteOrder) = attr.data
 }
 
 trait AsciiTag extends TypedTag[String] {
   val tagType = Type.Ascii
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = attr.data.zstring(0)
+  override def value(attr: IfdAttribute, order: ByteOrder) = attr.data.zstring(0)
 }
 
 trait LongListTag extends TypedTag[List[Long]] {
   val tagType = Type.Long
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = 
+  override def value(attr: IfdAttribute, order: ByteOrder) = 
     (for (i <- 0 until attr.count) yield attr.data.toLong(i * tagType.size, order)).toList 
 }
 
 trait LongTag extends TypedTag[Long] {
   val tagType = Type.Long
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
     attr.data.toLong(0, order)
   }
@@ -64,7 +64,7 @@ trait LongTag extends TypedTag[Long] {
 trait ShortListTag extends TypedTag[List[Int]] {
   val tagType = Type.Short
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     (for (i <- 0 until attr.count) yield attr.data.toShort(i * tagType.size, order)).toList
   }
 }
@@ -72,7 +72,7 @@ trait ShortListTag extends TypedTag[List[Int]] {
 trait ShortTag extends TypedTag[Int] {
   val tagType = Type.Short
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
     attr.data.toShort(0, order)
   }
@@ -81,7 +81,7 @@ trait ShortTag extends TypedTag[Int] {
 trait RationalListTag extends TypedTag[List[Rational]] {
   val tagType = Type.Rational
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     (for (i <- 0 until attr.count) yield attr.data.toRational(i * tagType.size, order)).toList
   }
 }
@@ -89,7 +89,7 @@ trait RationalListTag extends TypedTag[List[Rational]] {
 trait RationalTag extends TypedTag[Rational] {
   val tagType = Type.Rational
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
     attr.data.toRational(0, order)
   }
@@ -97,7 +97,7 @@ trait RationalTag extends TypedTag[Rational] {
 
 trait SignedRationalTag extends TypedTag[SignedRational] {
   val tagType = Type.SRational
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
     attr.data.toSignedRational(0, order)
   }
@@ -106,13 +106,13 @@ trait SignedRationalTag extends TypedTag[SignedRational] {
 trait NumericListTag extends TypedTag[List[Long]] {
   val tagType = Type.Long
   
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     (for (i <- 0 until attr.count) yield attr.data.toLong(i * tagType.size, order)).toList
   }
 }
 
 trait NumericTag extends TypedTag[Long] {
-  override def value(attr: IfdAttribute[_], order: ByteOrder) = {
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
     if (attr.tagType == Type.Short)
       attr.data.toShort(0, order)

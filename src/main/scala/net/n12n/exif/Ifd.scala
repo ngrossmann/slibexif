@@ -30,7 +30,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
   /** Set of tags. */
   val Tags: Set[T]
   val count = exif.data.toShort(exif.tiffOffset + offset, exif.byteOrder)
-  lazy val tags: Seq[IfdAttribute[T]] = for (i <- 0 until count) yield 
+  lazy val tags: Seq[IfdAttribute] = for (i <- 0 until count) yield 
     IfdAttribute(exif.data, offset + 2 + i * IfdAttribute.Length, exif.tiffOffset, exif.byteOrder,
         bytes2tag)
   /**
@@ -44,7 +44,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    * @param tag Attribute tag.
    * @return {{Some(attr)}} or {{None}}.
    */
-  def findAttr(tag: T): Option[IfdAttribute[T]] = tags.find(_.tag == tag)
+  def findAttr(tag: T): Option[IfdAttribute] = tags.find(_.tag == tag)
   
   /**
    * Get attribute by tag.
@@ -52,7 +52,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    * @return Attribute.
    * @throws AttributeNotFoundException If the attribute was not found in this IFD.
    */
-  def attr(tag: T): IfdAttribute[T] = findAttr(tag).getOrElse(throw AttributeNotFoundException(tag.name))
+  def attr(tag: T): IfdAttribute = findAttr(tag).getOrElse(throw AttributeNotFoundException(tag.name))
   
   /**
    * Get attribute value by tag.
@@ -61,7 +61,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    * @throws AttributeNotFoundException If the attribute was not found in this IFD.
    */
   def value[V](tag: TypedTag[V]): V = {
-    val ifdAttr: IfdAttribute[_] = tags.find(_.tag == tag).getOrElse(
+    val ifdAttr: IfdAttribute = tags.find(_.tag == tag).getOrElse(
         throw AttributeNotFoundException(tag.name))
     tag.value(ifdAttr, exif.byteOrder)
   }

@@ -31,7 +31,7 @@ object ExifSegment {
    * @param opt Optional IFD.
    * @return Attributes or an empty list.
    */
-  def listAttrs(opt: Option[Ifd]): List[IfdAttribute[Tag]] = opt match {
+  def listAttrs(opt: Option[Ifd]): List[IfdAttribute] = opt match {
     case Some(ifd) => ifd.tags.toList
     case None => Nil
   }
@@ -61,19 +61,19 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
   val ifd1: Option[TiffIfd] = if (ifd0.nextIfd != 0) Some(new TiffIfd(this, ifd0.nextIfd, "IFD1")) else None
   /** Optional Exif IFD. */
   val exifIfd: Option[ExifIfd] = ifd0.tags.find(_.tag == TiffIfd.ExifIfdPointer) match {
-    case Some(pointer: LongIFD[_]) => Some(new ExifIfd(this, pointer.value.head.toInt))
+    case Some(pointer: LongIFD) => Some(new ExifIfd(this, pointer.value.head.toInt))
     case None => None
   }
   /** Optional GPS IFD. */
   val gpsIfd: Option[GpsIfd] = ifd0.tags.find(_.tag == TiffIfd.GpsInfoIfdPointer) match {
-    case Some(pointer: LongIFD[_]) => Some(new GpsIfd(this, pointer.value.head.toInt))
+    case Some(pointer: LongIFD) => Some(new GpsIfd(this, pointer.value.head.toInt))
     case None => None
   }
   /** List of all IFDs in this Exif segment. */
   lazy val ifds = ifd0 :: ifd1.toList ::: exifIfd.toList ::: gpsIfd.toList
   
   /** List of all attributes of all IFDs of this segment. */
-  lazy val allAttrs: List[IfdAttribute[Tag]] = ifd0.tags.toList ::: listAttrs(ifd1) ::: 
+  lazy val allAttrs: List[IfdAttribute] = ifd0.tags.toList ::: listAttrs(ifd1) ::: 
     listAttrs(exifIfd) ::: listAttrs(gpsIfd)
   /**
    * Image orientation.
@@ -100,7 +100,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def findAttr(tag: TiffTag): Option[IfdAttribute[TiffTag]] = {
+  def findAttr(tag: TiffTag): Option[IfdAttribute] = {
     ifd0.findAttr(tag) match {
       case Some(tag) => Some(tag)
       case None => ifd1 match {
@@ -115,7 +115,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def findAttr(tag: ExifTag): Option[IfdAttribute[ExifTag]] = exifIfd match {
+  def findAttr(tag: ExifTag): Option[IfdAttribute] = exifIfd match {
     case Some(ifd) => ifd.findAttr(tag)
     case None => None
   }
@@ -125,7 +125,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * @param tag Attribute tag.
    * @return Option containing the attribute or {{None}}.
    */
-  def findAttr(tag: GpsTag): Option[IfdAttribute[GpsTag]] = gpsIfd match {
+  def findAttr(tag: GpsTag): Option[IfdAttribute] = gpsIfd match {
     case Some(ifd) => ifd.findAttr(tag)
     case None => None
   }
