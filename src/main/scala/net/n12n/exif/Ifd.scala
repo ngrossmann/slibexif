@@ -21,6 +21,7 @@ package net.n12n.exif
 
 /**
  * Image-File-Directory (IFD) structure.
+ * An IFD is a container for [[net.n12n.exif.IfdAttributes]]s.
  * 
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].

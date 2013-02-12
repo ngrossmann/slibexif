@@ -39,7 +39,12 @@ object ExifSegment {
 
 /**
  * Exif segment.
+ * An Exif segment contains at least one IFD (Image File Directory), the first IFD, called 
+ * ''0thIFD'' is mandatory all others are optional.
  * 
+ * To see which attributes are defined in which IFD check the corresponding companion objects
+ * [[net.n12n.exif.TiffIfd]], [[net.n12n.exif.ExifIfd]] and [[net.n12.exif.GpsIfd]].
+ *  
  * @param marker segment marker, see [[net.n12n.exif.Segment]].
  * @param length segment length, see [[net.n12n.exif.Segment]].
  * @param data segment data.
@@ -90,7 +95,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * Other = reserved
    * }}}
    */
-  val orientation = ifd0.findValue(TiffIfd.Orientation).getOrElse(ExifSegment.DefaultOrientation)
+  val orientation: Int = ifd0.findValue(TiffIfd.Orientation).getOrElse(ExifSegment.DefaultOrientation)
   
   /**
    * Find attribute in 0th or 1st IFD.

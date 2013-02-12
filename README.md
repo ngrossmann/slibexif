@@ -1,7 +1,7 @@
 libexif
 =======
 
-Scala library to read and maybe oneday modify JPEG Exif segments.
+Scala library to read JPEG Exif data. Check the wiki to see some examples.
 
-*This is work in progress*
+
 

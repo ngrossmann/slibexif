@@ -1,6 +1,9 @@
 package net.n12n.exif
 import java.io.IOException
 
+/**
+ * Simple command-line tool to view Exif segment content.
+ */
 object Exif extends App {
   try {
 	if (args.length != 1) 

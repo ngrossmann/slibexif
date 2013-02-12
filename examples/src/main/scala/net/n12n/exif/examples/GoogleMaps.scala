@@ -9,7 +9,7 @@ import java.io.FileInputStream
  */
 object GoogleMaps extends App {
   require(args.length == 1)
-  val exif = new JpegMetaData(new FileInputStream(args(0))).exif.get  
+  val exif = JpegMetaData(args(0)).exif.get  
   val gpsIfd = exif.gpsIfd.get
   val List(latDeg, latMin, latSec) = gpsIfd.value(GpsIfd.GPSLatitude)
   val List(lonDeg, lonMin, lonSec) = gpsIfd.value(GpsIfd.GPSLongitude)
