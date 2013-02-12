@@ -32,7 +32,7 @@ object ExifSegment {
    * @return Attributes or an empty list.
    */
   def listAttrs(opt: Option[Ifd]): List[IfdAttribute] = opt match {
-    case Some(ifd) => ifd.tags.toList
+    case Some(ifd) => ifd.attributes.toList
     case None => Nil
   }
 }
@@ -70,8 +70,11 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
   lazy val ifds = ifd0 :: ifd1.toList ::: exifIfd.toList ::: gpsIfd.toList
   
   /** List of all attributes of all IFDs of this segment. */
-  lazy val allAttrs: List[IfdAttribute] = ifd0.tags.toList ::: listAttrs(ifd1) ::: 
-    listAttrs(exifIfd) ::: listAttrs(gpsIfd)
+  lazy val allAttrs: List[IfdAttribute] = ifd0.attributes.toList ::: 
+    ifd1.map(_.attributes.toList).getOrElse(Nil) ::: 
+    exifIfd.map(_.attributes.toList).getOrElse(Nil) ::: 
+    gpsIfd.map(_.attributes.toList).getOrElse(Nil)
+  
   /**
    * Image orientation.
    * {{{
@@ -87,10 +90,7 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * Other = reserved
    * }}}
    */
-  val orientation = ifd0.tags.find(_.tag == TiffIfd.Orientation) match {
-    case Some(ifd) => ifd.data.toShort(0, byteOrder)
-    case _ => ExifSegment.DefaultOrientation
-  }
+  val orientation = ifd0.findValue(TiffIfd.Orientation).getOrElse(ExifSegment.DefaultOrientation)
   
   /**
    * Find attribute in 0th or 1st IFD.

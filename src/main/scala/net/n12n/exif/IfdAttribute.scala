@@ -30,35 +30,23 @@ object IfdAttribute {
    * @param tiffOffset Start of TIFF header in EXIF data.
    */
   def apply(exif: ByteSeq, tagOffset: Int, tiffOffset: Int, order: ByteOrder,
-      bytes2Tag: (Int) => Tag): IfdAttribute = {
+      bytes2Tag: (Int, Type, Int) => Tag with TypedTag[_]): IfdAttribute = {
     val start = tagOffset + tiffOffset
-    val tag = bytes2Tag(exif.toShort(start, order))
     val tagType = Type.value(exif.toShort(start + 2, order))
     val count = exif.toSignedLong(start + 4, order)
+    val tag = bytes2Tag(exif.toShort(start, order), tagType, count)
     val size = tagType.size * count
     val dataOffset = if (size > 4)
         exif.toSignedLong(start + 8, order) + tiffOffset
       else
         start + 8
-    create(tag, tagType, count, exif.slice(dataOffset, dataOffset + size), order) 
-  }
-  
-  
-  private def create[T <: Tag](namedTag: T, tagType: Type, count: Int, data: ByteSeq, order: ByteOrder): 
-    IfdAttribute = {
-    tagType match {
-      case Type.Ascii => new GenericIfdAttribute(namedTag, Type.Ascii, count, data, order)
-      case Type.Byte => new GenericIfdAttribute(namedTag, Type.Byte, count, data, order)
-      case Type.Undefined => new GenericIfdAttribute(namedTag, Type.Byte, count, data, order)
-      case gt: GenericType[_] if (count == 1) => 
-        new GenericIfdAttribute(namedTag, gt, count, data, order)
-      case gt: GenericType[_] => new GenericIfdListAttribute(namedTag, gt, count, data, order)
-    }
+    tag.ifdAttribute(tagType, count, exif.slice(dataOffset, dataOffset + size), order)
   }
 }
 
 abstract class IfdAttribute(val tag: Tag, val tagType: Type, val count: Int, 
     val data: ByteSeq) {
+  /** The Scala type to which this attribute maps. */
   type V
   require(tagType.size * count == data.length)
 
@@ -73,18 +61,17 @@ abstract class IfdAttribute(val tag: Tag, val tagType: Type, val count: Int,
   }
 }
 
-class GenericIfdAttribute[T](tag: Tag, tagType: GenericType[T], count: Int, data: ByteSeq, 
+class GenericIfdAttribute[T](tag: TypedTag[T], tagType: Type, count: Int, data: ByteSeq, 
     order: ByteOrder) 
   extends IfdAttribute(tag, tagType, count, data) {
   override type V = T
-  override val value: V = tagType.toScala(data, 0, order)
+  override lazy val value: V = tag.value(this, order)
 }
 
-class GenericIfdListAttribute[T](tag: Tag, tagType: GenericType[T], count: Int, data: ByteSeq, 
-    order: ByteOrder) 
-  extends IfdAttribute(tag, tagType, count, data) {
-  override type V = List[T]
-  override val value: V = (for (i <- 0 until count) 
-    yield tagType.toScala(data,i * tagType.size, order)).toList
-}
-
+//class GenericIfdListAttribute[T](tag: TypedTag[T], tagType: Type, count: Int, data: ByteSeq, 
+//    order: ByteOrder) 
+//  extends IfdAttribute(tag, tagType, count, data) {
+//  override type V = List[T]
+//  override val value: V = (for (i <- 0 until count) 
+//    yield tagType.toScala(data,i * tagType.size, order)).toList
+//}

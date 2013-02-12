@@ -24,6 +24,6 @@ object Exif extends App {
   
   private def printIfd(ifd: Ifd) {
     println("IFD: %s".format(ifd.name))
-    ifd.tags.foreach(a => println("  %s: %s".format(a.tag.name, a.value)))
+    ifd.attributes.foreach(a => println("  %s: %s".format(a.tag.name, a.value)))
   }
 }

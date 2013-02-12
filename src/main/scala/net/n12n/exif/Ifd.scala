@@ -28,11 +28,13 @@ package net.n12n.exif
 abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
   type T <: Tag
   /** Set of tags. */
-  val Tags: Set[T]
+  val Tags: Set[T with TypedTag[_]]
   val count = exif.data.toShort(exif.tiffOffset + offset, exif.byteOrder)
-  lazy val tags: Seq[IfdAttribute] = for (i <- 0 until count) yield 
+  lazy val attributes: Seq[IfdAttribute] = for (i <- 0 until count) yield 
     IfdAttribute(exif.data, offset + 2 + i * IfdAttribute.Length, exif.tiffOffset, exif.byteOrder,
-        bytes2tag)
+        findTag)
+  lazy val tags: Seq[T with TypedTag[_]] = attributes.map(_.tag.asInstanceOf[T with TypedTag[_]]);
+  
   /**
    * Offset to next IDF relative to the Exif's TiffHeader.
    */
@@ -44,7 +46,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    * @param tag Attribute tag.
    * @return {{Some(attr)}} or {{None}}.
    */
-  def findAttr(tag: T): Option[IfdAttribute] = tags.find(_.tag == tag)
+  def findAttr(tag: T): Option[IfdAttribute] = attributes.find(_.tag == tag)
   
   /**
    * Get attribute by tag.
@@ -54,7 +56,7 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    */
   def attr(tag: T): IfdAttribute = findAttr(tag).getOrElse(throw AttributeNotFoundException(tag.name))
   
-  def findValue[V](tag: T with TypedTag[V]): Option[V] = tags.find(_.tag == tag).
+  def findValue[V](tag: T with TypedTag[V]): Option[V] = attributes.find(_.tag == tag).
   	map(tag.value(_, exif.byteOrder)) 
   
   /**
@@ -64,15 +66,15 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    * @throws AttributeNotFoundException If the attribute was not found in this IFD.
    */
   def value[V](tag: T with TypedTag[V]): V = {
-    val ifdAttr: IfdAttribute = tags.find(_.tag == tag).getOrElse(
+    val ifdAttr: IfdAttribute = attributes.find(_.tag == tag).getOrElse(
         throw AttributeNotFoundException(tag.name))
     tag.value(ifdAttr, exif.byteOrder)
   }
 
-  protected def bytes2tag(id: Int): T = 
-    Tags.find(_.marker == id).getOrElse(createTag(id))
+  protected def findTag(id: Int, tagType: Type, count: Int): T with TypedTag[_] = 
+    Tags.find(_.marker == id).getOrElse(createTag(id, tagType, count))
   
-  protected def createTag(id: Int): T
+  protected def createTag(marker: Int, tagType: Type, count: Int): T with TypedTag[_]
   
-  override def toString() = "IFD(%x, %x)\n%s".format(count, nextIfd, tags.mkString("  \n"))
+  override def toString() = "IFD(%x, %x)\n%s".format(count, nextIfd, attributes.mkString("  \n"))
 }

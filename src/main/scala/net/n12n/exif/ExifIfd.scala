@@ -28,8 +28,18 @@ package net.n12n.exif
 class ExifIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "Exif IFD") {
   override type T = ExifTag
   override val Tags = ExifIfd.Tags
-  override protected def createTag(marker: Int) = 
-    new ExifTag(marker, "Unknown Exif Tag %04x".format(marker))
+  override protected def createTag(marker: Int, tagType: Type, count: Int) = {
+    tagType match {
+      case Type.Ascii => new T(marker, "Unknown") with AsciiTag
+      case Type.Byte => new T(marker, "Unknown") with ByteTag
+      case Type.Undefined => new T(marker, "Unknown") with UndefinedTag
+      case Type.Long if (count == 1) => new T(marker, "Unknown") with LongTag
+      case Type.Long => new T(marker, "Unknown") with LongListTag
+      case Type.Short if (count == 1) => new T(marker, "Unkown") with ShortTag
+      case Type.Short => new T(marker, "Unknown") with ShortListTag
+      case _ => throw new IllegalArgumentException("Tag %x of type %s".format(marker, tagType))
+    } 
+  }
 }
 
 class ExifTag(marker: Int, name: String) extends Tag(marker, name)
@@ -94,7 +104,7 @@ object ExifIfd {
   val DeviceSettingDescription = new ExifTag(41995, "DeviceSettingDescription") with UndefinedTag
   val SubjectDistanceRange = new ExifTag(41996, "SubjectDistanceRange") with ShortTag
   
-  val Tags = Set[ExifTag](PixelXDimension, PixelYDimension,
+  val Tags = Set[ExifTag with TypedTag[_]](PixelXDimension, PixelYDimension,
     ComponentsConfiguration, CompressedBitsPerPixel, ExifVersion, FlashpixVersion, ColorSpace,
     MakerNote, UserComment, RelatedSoundFile, DateTimeOriginal, DateTimeDigitized, SubSecTime,
     SubSecTimeOriginal, SubSecTimeDigitized, ImageUniqueID,

@@ -28,7 +28,18 @@ package net.n12n.exif
 class TiffIfd(exif: ExifSegment, offset: Int, name: String) extends Ifd(exif, offset, name) {
   override type T = TiffTag
   override val Tags = TiffIfd.Tags
-  override protected def createTag(marker: Int) = new TiffTag(marker, "Unknown Tiff Tag")
+  override protected def createTag(marker: Int, tagType: Type, count: Int) = {
+    tagType match {
+      case Type.Ascii => new T(marker, "Unknown") with AsciiTag
+      case Type.Byte => new T(marker, "Unknown") with ByteTag
+      case Type.Undefined => new T(marker, "Unknown") with UndefinedTag
+      case Type.Long if (count == 1) => new T(marker, "Unknown") with LongTag
+      case Type.Long => new T(marker, "Unknown") with LongListTag
+      case Type.Short if (count == 1) => new T(marker, "Unkown") with ShortTag
+      case Type.Short => new T(marker, "Unknown") with ShortListTag
+      case _ => throw new IllegalArgumentException("Tag %x of type %s".format(marker, tagType))
+    } 
+  }
 }
 
 class TiffTag(marker: Int, name: String) extends Tag(marker, name)
@@ -68,7 +79,8 @@ object TiffIfd {
   val Artist = new TiffTag(315, "Artist") with AsciiTag
   val Copyright = new TiffTag(33432, "Copyright") with AsciiTag
   
-  val Tags = Set[TiffTag](ImageWidth, ImageLength, BitsPerSample, Compression, PhotometricInterpretation,
+  val Tags = Set[TiffTag with TypedTag[_]](ImageWidth, ImageLength, BitsPerSample, Compression,
+      PhotometricInterpretation,
     Orientation, SamplesPerPixel, PlanarConfiguration, YCbCrSubSampling, YCbCrPositioning,
     ExifIfdPointer, GpsInfoIfdPointer, XResolution, YResolution, ResolutionUnit, StripOffsets, 
     RowsPerStrip, StripByteCounts, JPEGInterchangeFormat, JPEGInterchangeFormatLength, 

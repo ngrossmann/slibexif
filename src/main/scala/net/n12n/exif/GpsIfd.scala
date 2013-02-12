@@ -26,7 +26,18 @@ package net.n12n.exif
 class GpsIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "GPS IFD") {
   override type T = GpsTag
   override val Tags = GpsIfd.Tags
-  override protected def createTag(marker: Int) = new GpsTag(marker, "Unknown GPS Tag")
+  override protected def createTag(marker: Int, tagType: Type, count: Int) = {
+    tagType match {
+      case Type.Ascii => new T(marker, "Unknown") with AsciiTag
+      case Type.Byte => new T(marker, "Unknown") with ByteTag
+      case Type.Undefined => new T(marker, "Unknown") with UndefinedTag
+      case Type.Long if (count == 1) => new T(marker, "Unknown") with LongTag
+      case Type.Long => new T(marker, "Unknown") with LongListTag
+      case Type.Short if (count == 1) => new T(marker, "Unkown") with ShortTag
+      case Type.Short => new T(marker, "Unknown") with ShortListTag
+      case _ => throw new IllegalArgumentException("Tag %x of type %s".format(marker, tagType))
+    } 
+  }
 }
 
 class GpsTag(marker: Int, name: String) extends Tag(marker, name)
@@ -64,7 +75,7 @@ object GpsIfd {
   val GPSAreaInformation = new GpsTag(28, "GPSAreaInformation") with UndefinedTag
   val GPSDateStamp = new GpsTag(29, "GPSDateStamp") with AsciiTag
   val GPSDifferential = new GpsTag(30, "GPSDifferential") with ShortTag
-  val Tags = Set[GpsTag](GPSVersionID,
+  val Tags = Set[GpsTag with TypedTag[_]](GPSVersionID,
     GPSLatitudeRef,
     GPSLatitude,
     GPSLongitudeRef,
