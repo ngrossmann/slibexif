@@ -44,18 +44,15 @@ object IfdAttribute {
   }
   
   
-  def create[T <: Tag](namedTag: T, tagType: Type, count: Int, data: ByteSeq, order: ByteOrder): 
+  private def create[T <: Tag](namedTag: T, tagType: Type, count: Int, data: ByteSeq, order: ByteOrder): 
     IfdAttribute = {
     tagType match {
-      case Type.Ascii => new AsciiIFD(namedTag, count, data)
-      case Type.Byte => new ByteIFD(namedTag, count, data)
-      case Type.Long => new LongIFD(namedTag, count, data, order)
-      case Type.Rational => new RationalIFD(namedTag, count, data, order)
-      case Type.Short => new ShortIFD(namedTag, count, data, order)
-      case Type.SLong => new SignedLongIFD(namedTag, count, data, order)
-      case Type.SRational => new SignedRationalIFD(namedTag, count, data, order)
-      case Type.Undefined => new UndefinedIFD(namedTag, count, data)
-      case _ => new UnknownIFD(namedTag, tagType, count, data)
+      case Type.Ascii => new GenericIfdAttribute(namedTag, Type.Ascii, count, data, order)
+      case Type.Byte => new GenericIfdAttribute(namedTag, Type.Byte, count, data, order)
+      case Type.Undefined => new GenericIfdAttribute(namedTag, Type.Byte, count, data, order)
+      case gt: GenericType[_] if (count == 1) => 
+        new GenericIfdAttribute(namedTag, gt, count, data, order)
+      case gt: GenericType[_] => new GenericIfdListAttribute(namedTag, gt, count, data, order)
     }
   }
 }
@@ -76,68 +73,18 @@ abstract class IfdAttribute(val tag: Tag, val tagType: Type, val count: Int,
   }
 }
 
-class AsciiIFD(tag: Tag, count: Int, data: ByteSeq)
-  extends IfdAttribute(tag, Type.Ascii, count, data) {
-  type V = String
-  val value = data.zstring(0)
+class GenericIfdAttribute[T](tag: Tag, tagType: GenericType[T], count: Int, data: ByteSeq, 
+    order: ByteOrder) 
+  extends IfdAttribute(tag, tagType, count, data) {
+  override type V = T
+  override val value: V = tagType.toScala(data, 0, order)
 }
 
-class ByteIFD(tag: Tag, count: Int, data: ByteSeq)
-  extends IfdAttribute(tag, Type.Byte, count, data) {
-  type V = ByteSeq
-  override val value = data
+class GenericIfdListAttribute[T](tag: Tag, tagType: GenericType[T], count: Int, data: ByteSeq, 
+    order: ByteOrder) 
+  extends IfdAttribute(tag, tagType, count, data) {
+  override type V = List[T]
+  override val value: V = (for (i <- 0 until count) 
+    yield tagType.toScala(data,i * tagType.size, order)).toList
 }
 
-class ShortIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.Short, count, data) {
-  type V = Seq[Int]
-  val value: Seq[Int] = for (i <- 0 until count) yield data.toShort(i * tagType.size, order)
-}
-
-class LongIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.Long, count, data) {
-  type V = Seq[Long]
-  val value: Seq[Long] = for (i <- 0 until count) yield data.toLong(i * tagType.size, order)
-}
-
-class LongIFD2(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.Long, count, data) {
-  type V = Seq[Long]
-  val value: Seq[Long] = for (i <- 0 until count) yield data.toLong(i * tagType.size, order)
-}
-
-class RationalIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.Rational, count, data) {
-  type V = Seq[Rational]
-  val value: Seq[Rational] = for (i <- 0 until count) yield data.toRational(i * tagType.size, order)
-}
-
-class UndefinedIFD(tag: Tag, count: Int, data: ByteSeq)
-  extends IfdAttribute(tag, Type.Ascii, count, data) {
-  type V = ByteSeq
-  val value = data
-}
-
-class SignedShortIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.Short, count, data) {
-  type V = Seq[Short]
-  val value: Seq[Short] = for (i <- 0 until count) yield data.toSignedShort(i * tagType.size, order)
-}
-
-class SignedLongIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.SLong, count, data) {
-  type V = Seq[Int]
-  val value: Seq[Int] = for (i <- 0 until count) yield data.toSignedLong(i * tagType.size, order)
-}
-
-class SignedRationalIFD(tag: Tag, count: Int, data: ByteSeq, order: ByteOrder)
-  extends IfdAttribute(tag, Type.SRational, count, data) {
-  type V = Seq[SignedRational]
-  val value: Seq[SignedRational] = for (i <- 0 until count) yield 
-    data.toSignedRational(i * tagType.size, order)
-}
-
-class UnknownIFD(tag: Tag, tagType: Type, count: Int, data: ByteSeq) extends IfdAttribute(tag, tagType, count, data) {
-  type V = ByteSeq
-  override val value = data
-}

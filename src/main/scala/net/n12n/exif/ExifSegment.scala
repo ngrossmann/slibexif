@@ -60,15 +60,12 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
   /** Optional 1st IFD. */
   val ifd1: Option[TiffIfd] = if (ifd0.nextIfd != 0) Some(new TiffIfd(this, ifd0.nextIfd, "IFD1")) else None
   /** Optional Exif IFD. */
-  val exifIfd: Option[ExifIfd] = ifd0.tags.find(_.tag == TiffIfd.ExifIfdPointer) match {
-    case Some(pointer: LongIFD) => Some(new ExifIfd(this, pointer.value.head.toInt))
-    case None => None
-  }
+  val exifIfd: Option[ExifIfd] = ifd0.findValue(TiffIfd.ExifIfdPointer).
+    map((pointer) => new ExifIfd(this, pointer.toInt))
   /** Optional GPS IFD. */
-  val gpsIfd: Option[GpsIfd] = ifd0.tags.find(_.tag == TiffIfd.GpsInfoIfdPointer) match {
-    case Some(pointer: LongIFD) => Some(new GpsIfd(this, pointer.value.head.toInt))
-    case None => None
-  }
+  val gpsIfd: Option[GpsIfd] = ifd0.findValue(TiffIfd.GpsInfoIfdPointer).
+    map((pointer => new GpsIfd(this, pointer.toInt)))
+  
   /** List of all IFDs in this Exif segment. */
   lazy val ifds = ifd0 :: ifd1.toList ::: exifIfd.toList ::: gpsIfd.toList
   

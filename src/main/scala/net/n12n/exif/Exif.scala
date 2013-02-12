@@ -18,7 +18,7 @@ object Exif extends App {
   }
   
   private def usage() {
-      System.err.println("Usage: Exif <path>")
+    System.err.println("Usage: Exif <path>")
     System.exit(1)
   }
   

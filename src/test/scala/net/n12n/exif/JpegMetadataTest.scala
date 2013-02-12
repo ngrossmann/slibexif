@@ -28,37 +28,27 @@ class JpegMetaDataTest extends FunSuite {
   test("Read JPEG meta-data") {
     val metadata = load("image.jpg")
     assert(metadata.exif != None, "Exif tag found")
+    assert(metadata.comments.length === 1, "Comment found")
   }
-    
+  
   expect(8, "Orientation") {
     val metadata = load("image-vertical.jpg")
-    metadata.exif match {
-      case Some(exif) => {
-        exif.orientation 
-      }
-      case None => -1
-    }
+    metadata.exif.get.orientation
   }
   
-  test("GPS Data") {
+  expect(Rational(48, 1), "GPS Data") {
     val metadata = load("image-gps.jpg")
-    metadata.exif match {
-      case Some(exif) => exif.findAttr(GpsIfd.GPSLatitude) match {
-        case Some(attr: RationalIFD) => 
-          assert(attr.value.length === 3)
-          assert(attr.value(0) === Rational(48, 1))
-        case None => fail("GPSLatitude not found")
-      }
-      case None => fail("Exif segment not found")
-    }
+    val lat = for {
+      exif <- metadata.exif
+      gpsIfd <- exif.gpsIfd
+      value <- gpsIfd.findValue(GpsIfd.GPSLatitude)
+    } yield value(0)
+    lat.get
   }
   
-  expect(64, "All Attributes found") {
+  expect(65, "All Attributes found") {
     val metadata = load("image-gps.jpg")
-    metadata.exif match {
-      case Some(exif) => exif.allAttrs.length
-      case None => fail("Exif segment not found")
-    }
+    metadata.exif.get.allAttrs.length
   }
 
   private def load(file: String) = {

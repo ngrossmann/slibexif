@@ -19,4 +19,8 @@ class ExifSegmentTest extends FunSuite {
   test("findAttr finds GpsAttribute") {
     assert(exif.findAttr(GpsIfd.GPSLongitude) != None, "GPSLongitude not found")
   }
+  
+  expect("A user comment", "Unicode UserComment found") {
+    exif.exifIfd.get.value(ExifIfd.UserComment)
+  }
 }

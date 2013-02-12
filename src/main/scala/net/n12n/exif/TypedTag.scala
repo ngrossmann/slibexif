@@ -21,10 +21,11 @@
 package net.n12n.exif
 
 import ByteOrder._
+import java.nio.charset.Charset
 
 /**
  * Tag identifying IFD attributes.
- *
+ * @param T The Scala type to which the tag is mapped.
  */
 trait TypedTag[T] extends Tag {
   def value(attr: IfdAttribute, order: ByteOrder): T
@@ -120,5 +121,18 @@ trait NumericTag extends TypedTag[Long] {
       attr.data.toLong(0, order)
     else
       throw new IllegalArgumentException("Type %s not supported".format(attr.tagType))
+  }
+}
+
+trait UserCommentTag extends TypedTag[String] {
+  
+  override def value(attr: IfdAttribute, order: ByteOrder) = {
+	  val charset = attr.data.zstring(0) match {
+	    case "ASCII" => Charset.forName("US-ASCII")
+	    case "JIS" => Charset.forName("")
+	    case "Unicode" => Charset.forName("UTF-8")
+	    case _ => Charset.defaultCharset()
+	  }
+	  new String(attr.data.slice(8).toArray, charset)
   }
 }

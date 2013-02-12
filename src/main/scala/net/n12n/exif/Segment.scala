@@ -20,17 +20,17 @@
 package net.n12n.exif
 
 object Segment {
-  case class Marker(marker: Int, name: String) extends Tag
-  val JfifMarker = Marker(0xffe0, "JFIF")
-  val App1Marker = Marker(0xffe1, "APP1")
-  val App2Marker = Marker(0xffe2, "APP2")
-  val DqtMarker = Marker(0xffdb, "DQT")
-  val DhtMarker = Marker(0xffc4, "DHT")
-  val DriMarker = Marker(0xffdd, "DRI")
-  val SofMarker = Marker(0xffc0, "SOF")
-  val SosMarker = Marker(0xffda, "SOS")
-  val EoiMarker = Marker(0xffd9, "EOI")
-  val ComMarker = Marker(0xfffe, "Comment")
+  class Marker(marker: Int, name: String) extends Tag(marker, name)
+  val JfifMarker = new Marker(0xffe0, "JFIF")
+  val App1Marker = new Marker(0xffe1, "APP1")
+  val App2Marker = new Marker(0xffe2, "APP2")
+  val DqtMarker = new Marker(0xffdb, "DQT")
+  val DhtMarker = new Marker(0xffc4, "DHT")
+  val DriMarker = new Marker(0xffdd, "DRI")
+  val SofMarker = new Marker(0xffc0, "SOF")
+  val SosMarker = new Marker(0xffda, "SOS")
+  val EoiMarker = new Marker(0xffd9, "EOI")
+  val ComMarker = new Marker(0xfffe, "COM")
   val Exif = ByteSeq("Exif")
   
   val Markers = Set(JfifMarker, App1Marker, App2Marker, DqtMarker, DhtMarker, DriMarker, 
@@ -40,14 +40,14 @@ object Segment {
     val markerValue = marker.toShort(0, ByteOrder.BigEndian)
     val tag = Markers.find(_.marker == markerValue) match {
       case Some(t) => t
-      case None => Marker(markerValue, "Unknown Marker")
+      case None => new Marker(markerValue, "Unknown Marker")
     }
     val length = (in.next() << 8) + in.next()
     val data = ByteSeq(length - 2, in)
     
     if (tag == Segment.App1Marker && data.slice(0, Exif.length) == Exif)
       new ExifSegment(length, data)
-    else if (marker == ComMarker)
+    else if (tag == ComMarker)
       new ComSegment(ComMarker, length, data)
     else {
       new Segment(tag, length, data)

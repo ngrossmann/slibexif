@@ -29,10 +29,10 @@ class ExifIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "Exif IF
   override type T = ExifTag
   override val Tags = ExifIfd.Tags
   override protected def createTag(marker: Int) = 
-    ExifTag(marker, "Unknown Exif Tag %04x".format(marker))
+    new ExifTag(marker, "Unknown Exif Tag %04x".format(marker))
 }
 
-case class ExifTag(marker: Int, name: String) extends Tag
+class ExifTag(marker: Int, name: String) extends Tag(marker, name)
 
 object ExifIfd {
   
@@ -44,7 +44,7 @@ object ExifIfd {
   val FlashpixVersion = new ExifTag(40960, "FlashpixVersion") with UndefinedTag
   val ColorSpace = new ExifTag(40961, "ColorSpace") with ShortTag
   val MakerNote = new ExifTag(37500, "MakerNote") with UndefinedTag
-  val UserComment = new ExifTag(37510, "UserComment") with UndefinedTag
+  val UserComment = new ExifTag(37510, "UserComment") with UserCommentTag
   val RelatedSoundFile = new ExifTag(40964, "RelatedSoundFile") with AsciiTag
   val DateTimeOriginal = new ExifTag(36867, "DateTimeOriginal") with AsciiTag
   val DateTimeDigitized = new ExifTag(36868, "DateTimeDigitized") with AsciiTag

@@ -28,10 +28,10 @@ package net.n12n.exif
 class TiffIfd(exif: ExifSegment, offset: Int, name: String) extends Ifd(exif, offset, name) {
   override type T = TiffTag
   override val Tags = TiffIfd.Tags
-  override protected def createTag(marker: Int) = TiffTag(marker, "Unknown Tiff Tag")
+  override protected def createTag(marker: Int) = new TiffTag(marker, "Unknown Tiff Tag")
 }
 
-case class TiffTag(marker: Int, name: String) extends Tag
+class TiffTag(marker: Int, name: String) extends Tag(marker, name)
 
 object TiffIfd {
   val ImageWidth = new TiffTag(256, "ImageWidth") with NumericTag
@@ -48,6 +48,7 @@ object TiffIfd {
   val GpsInfoIfdPointer = new TiffTag(0x8825, "GpsInfoIfdPointer") with LongTag
   val XResolution = new TiffTag(282, "XResolution") with RationalTag
   val YResolution = new TiffTag(283, "YResolution") with RationalTag
+  /** 2 = inches, 3 = centimeters, others = reserved. */
   val ResolutionUnit = new TiffTag(296, "ResolutionUnit") with ShortTag
   val StripOffsets = new TiffTag(273, "StripOffsets") with NumericListTag
   val RowsPerStrip = new TiffTag(278, "RowsPerStrip") with NumericTag

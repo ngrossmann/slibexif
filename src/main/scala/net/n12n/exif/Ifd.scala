@@ -54,13 +54,16 @@ abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
    */
   def attr(tag: T): IfdAttribute = findAttr(tag).getOrElse(throw AttributeNotFoundException(tag.name))
   
+  def findValue[V](tag: T with TypedTag[V]): Option[V] = tags.find(_.tag == tag).
+  	map(tag.value(_, exif.byteOrder)) 
+  
   /**
    * Get attribute value by tag.
    * @param tag Tag
    * @return Attribute value
    * @throws AttributeNotFoundException If the attribute was not found in this IFD.
    */
-  def value[V](tag: TypedTag[V]): V = {
+  def value[V](tag: T with TypedTag[V]): V = {
     val ifdAttr: IfdAttribute = tags.find(_.tag == tag).getOrElse(
         throw AttributeNotFoundException(tag.name))
     tag.value(ifdAttr, exif.byteOrder)

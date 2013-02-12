@@ -53,8 +53,13 @@ class ByteSeq(a: Array[Byte]) {
 
   override def hashCode() = array.product
   
-  def slice(start:Int, end:Int) = new ByteSeq(array.slice(start, end))
+  def slice(start:Int, end: Int = length) = new ByteSeq(array.slice(start, end))
   
+  def toArray(): Array[Byte] = {
+    val a = new Array[Byte](length)
+    Array.copy(array, 0, a, 0, length)
+    a
+  }
   def toShort(offset: Int, byteOrder: ByteOrder): Int = toNumber(offset, byteOrder, Type.Short.size).toInt
   
   def toSignedShort(offset: Int, byteOrder: ByteOrder) = 

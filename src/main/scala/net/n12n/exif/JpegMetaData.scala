@@ -44,12 +44,12 @@ class JpegMetaData(data: InputStream) {
     " found " + soi)
   val segments = parseSegments(in)
   /** List of comment segments */
-  val comments = segments.filter(_.marker == Segment.ComMarker)
+  val comments: List[ComSegment] = segments.filter(_.marker == Segment.ComMarker).
+    map(_.asInstanceOf[ComSegment])
   
-  val exif: Option[ExifSegment] = segments.find(_.isInstanceOf[ExifSegment]) match {
-    case Some(exif: ExifSegment) => Some(exif)
-    case _ => None
-  }
+  val exif: Option[ExifSegment] = 
+    segments.find(_.isInstanceOf[ExifSegment]).map(_.asInstanceOf[ExifSegment])
+  
   /**
    * Total size of the image.
    */

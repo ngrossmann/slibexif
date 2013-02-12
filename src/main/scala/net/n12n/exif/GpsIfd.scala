@@ -26,10 +26,10 @@ package net.n12n.exif
 class GpsIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "GPS IFD") {
   override type T = GpsTag
   override val Tags = GpsIfd.Tags
-  override protected def createTag(marker: Int) = GpsTag(marker, "Unknown GPS Tag")
+  override protected def createTag(marker: Int) = new GpsTag(marker, "Unknown GPS Tag")
 }
 
-case class GpsTag(val marker: Int, val name: String) extends Tag
+class GpsTag(marker: Int, name: String) extends Tag(marker, name)
 
 object GpsIfd {
   
