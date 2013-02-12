@@ -1,0 +1,751 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>net.n12n.exif.TiffIfd</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../lib/template.css" />
+      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+      <div id="definition">
+        <a title="Go to companion" href="TiffIfd.html"><img src="../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a name="net" class="extype" href="../../package.html">net</a>.<a name="net.n12n" class="extype" href="../package.html">n12n</a>.<a name="net.n12n.exif" class="extype" href="package.html">exif</a></p>
+        <h1><a title="Go to companion" href="TiffIfd.html">TiffIfd</a></h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TiffIfd</span><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      
+      <div class="fullcommenttop" id="comment"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent">AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+        </div></div>
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
+            </div>
+        <div id="ancestors">
+              <span class="filtertype">Inherited</span>
+              <ol><li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li></ol>
+              <ol id="linearization"><li name="net.n12n.exif.TiffIfd" class="in"><span>TiffIfd</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+            </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        
+
+        <div class="values members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="scala.AnyRef#!=" data-isabs="false">
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $bang$eq">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#!=" data-isabs="false">
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $bang$eq">!=</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef###" data-isabs="false">
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $hash$hash">##</span><span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#==" data-isabs="false">
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $eq$eq">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#==" data-isabs="false">
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $eq$eq">==</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Artist" data-isabs="false">
+      <a id="Artist:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Artist</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#BitsPerSample" data-isabs="false">
+      <a id="BitsPerSample:TiffTag with ShortListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">BitsPerSample</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortListTag" class="extype" href="ShortListTag.html">ShortListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Compression" data-isabs="false">
+      <a id="Compression:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Compression</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Copyright" data-isabs="false">
+      <a id="Copyright:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Copyright</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#DateTime" data-isabs="false">
+      <a id="DateTime:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">DateTime</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ExifIfdPointer" data-isabs="false">
+      <a id="ExifIfdPointer:TiffTag with LongTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ExifIfdPointer</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.LongTag" class="extype" href="LongTag.html">LongTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#GpsInfoIfdPointer" data-isabs="false">
+      <a id="GpsInfoIfdPointer:TiffTag with LongTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">GpsInfoIfdPointer</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.LongTag" class="extype" href="LongTag.html">LongTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ImageDescription" data-isabs="false">
+      <a id="ImageDescription:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ImageDescription</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ImageLength" data-isabs="false">
+      <a id="ImageLength:TiffTag with NumericTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ImageLength</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.NumericTag" class="extype" href="NumericTag.html">NumericTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ImageWidth" data-isabs="false">
+      <a id="ImageWidth:TiffTag with NumericTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ImageWidth</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.NumericTag" class="extype" href="NumericTag.html">NumericTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#JPEGInterchangeFormat" data-isabs="false">
+      <a id="JPEGInterchangeFormat:TiffTag with LongTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JPEGInterchangeFormat</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.LongTag" class="extype" href="LongTag.html">LongTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#JPEGInterchangeFormatLength" data-isabs="false">
+      <a id="JPEGInterchangeFormatLength:TiffTag with LongTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JPEGInterchangeFormatLength</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.LongTag" class="extype" href="LongTag.html">LongTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Make" data-isabs="false">
+      <a id="Make:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Make</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Model" data-isabs="false">
+      <a id="Model:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Model</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Orientation" data-isabs="false">
+      <a id="Orientation:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Orientation</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#PhotometricInterpretation" data-isabs="false">
+      <a id="PhotometricInterpretation:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PhotometricInterpretation</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#PlanarConfiguration" data-isabs="false">
+      <a id="PlanarConfiguration:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PlanarConfiguration</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#PrimaryChromaticities" data-isabs="false">
+      <a id="PrimaryChromaticities:TiffTag with RationalListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PrimaryChromaticities</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalListTag" class="extype" href="RationalListTag.html">RationalListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ReferenceBlackWhite" data-isabs="false">
+      <a id="ReferenceBlackWhite:TiffTag with RationalListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ReferenceBlackWhite</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalListTag" class="extype" href="RationalListTag.html">RationalListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#ResolutionUnit" data-isabs="false">
+      <a id="ResolutionUnit:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ResolutionUnit</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">2 = inches, 3 = centimeters, others = reserved.</p>
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#RowsPerStrip" data-isabs="false">
+      <a id="RowsPerStrip:TiffTag with NumericTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RowsPerStrip</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.NumericTag" class="extype" href="NumericTag.html">NumericTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#SamplesPerPixel" data-isabs="false">
+      <a id="SamplesPerPixel:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">SamplesPerPixel</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Software" data-isabs="false">
+      <a id="Software:TiffTag with AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Software</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.AsciiTag" class="extype" href="AsciiTag.html">AsciiTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#StripByteCounts" data-isabs="false">
+      <a id="StripByteCounts:TiffTag with NumericListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StripByteCounts</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.NumericListTag" class="extype" href="NumericListTag.html">NumericListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#StripOffsets" data-isabs="false">
+      <a id="StripOffsets:TiffTag with NumericListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StripOffsets</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.NumericListTag" class="extype" href="NumericListTag.html">NumericListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#Tags" data-isabs="false">
+      <a id="Tags:Set[TiffTag with net.n12n.exif.TypedTag[_]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Tags</span><span class="result">: <span name="scala.collection.immutable.Set" class="extype">Set</span>[<a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with net.n12n.exif.TypedTag[_]]</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#TransferFunction" data-isabs="false">
+      <a id="TransferFunction:TiffTag with ShortListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TransferFunction</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortListTag" class="extype" href="ShortListTag.html">ShortListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#WhitePoint" data-isabs="false">
+      <a id="WhitePoint:TiffTag with RationalListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">WhitePoint</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalListTag" class="extype" href="RationalListTag.html">RationalListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#XResolution" data-isabs="false">
+      <a id="XResolution:TiffTag with RationalTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XResolution</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalTag" class="extype" href="RationalTag.html">RationalTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#YCbCrCoefficients" data-isabs="false">
+      <a id="YCbCrCoefficients:TiffTag with RationalListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YCbCrCoefficients</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalListTag" class="extype" href="RationalListTag.html">RationalListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#YCbCrPositioning" data-isabs="false">
+      <a id="YCbCrPositioning:TiffTag with ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YCbCrPositioning</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortTag" class="extype" href="ShortTag.html">ShortTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#YCbCrSubSampling" data-isabs="false">
+      <a id="YCbCrSubSampling:TiffTag with ShortListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YCbCrSubSampling</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.ShortListTag" class="extype" href="ShortListTag.html">ShortListTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.n12n.exif.TiffIfd#YResolution" data-isabs="false">
+      <a id="YResolution:TiffTag with RationalTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YResolution</span><span class="result">: <a name="net.n12n.exif.TiffTag" class="extype" href="TiffTag.html">TiffTag</a> with <a name="net.n12n.exif.RationalTag" class="extype" href="RationalTag.html">RationalTag</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#equals" data-isabs="false">
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
+      <a id="getClass():java.lang.Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#hashCode" data-isabs="false">
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll" data-isabs="false">
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
+      <a id="synchronized[T0](⇒ T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#toString" data-isabs="false">
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div name="scala.AnyRef" class="parent">
+              <h3>Inherited from AnyRef</h3>
+            </div><div name="scala.Any" class="parent">
+              <h3>Inherited from <span name="scala.Any" class="extype">Any</span></h3>
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
