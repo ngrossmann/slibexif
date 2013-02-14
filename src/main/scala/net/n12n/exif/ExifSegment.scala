@@ -43,7 +43,7 @@ object ExifSegment {
  * ''0thIFD'' is mandatory all others are optional.
  * 
  * To see which attributes are defined in which IFD check the corresponding companion objects
- * [[net.n12n.exif.TiffIfd]], [[net.n12n.exif.ExifIfd]] and [[net.n12.exif.GpsIfd]].
+ * [[net.n12n.exif.TiffIfd]], [[net.n12n.exif.ExifIfd]] and [[net.n12n.exif.GpsIfd]].
  *  
  * @param marker segment marker, see [[net.n12n.exif.Segment]].
  * @param length segment length, see [[net.n12n.exif.Segment]].
