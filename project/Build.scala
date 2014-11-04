@@ -6,17 +6,27 @@ import sbtrelease.ReleaseStateTransformations._
 
 object LibExifBuild extends Build {
   val dependencies = Seq(
-      "org.scalatest" %% "scalatest" % "2.0.M5" % "test" cross(CrossVersion.full)
+      "org.scalatest" %% "scalatest" % "2.1.7" % "test" cross CrossVersion.binary
   )
   val mySettings = Defaults.defaultSettings ++ releaseSettings ++ Seq(
       libraryDependencies ++= dependencies,
       name := "libexif",
       organization := "net.n12n.exif",
-      scalaVersion in ThisBuild := "2.9.2",
-      crossScalaVersions := Seq("2.9.2", "2.10.0"),
+      scalaVersion in ThisBuild := "2.11.4",
+      crossScalaVersions := Seq("2.10.4", "2.11.4"),
       scalacOptions ++= Seq("-deprecation", "-unchecked"),
       testOptions ++= Seq(Tests.Argument("-oSDW")), 
-      version in ThisBuild := "0.1.0-SNAPSHOT",
+      version in ThisBuild := "0.2.0-SNAPSHOT",
+      pomExtra := <licenses>
+        <license>
+          <name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+          <url>http://www.gnu.org/licenses/lgpl.txt</url>
+          <distribution>repo</distribution>
+        </license>
+      </licenses>
+      <scm>
+        <url>https://github.com/ngrossmann/libexif</url>
+      </scm>,
       ReleaseKeys.releaseProcess :=  Seq[ReleaseStep](
     		  checkSnapshotDependencies,
     		  inquireVersions, 

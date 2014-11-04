@@ -9,11 +9,19 @@ import java.io.FileInputStream
  */
 object GoogleMaps extends App {
   require(args.length == 1)
-  val exif = JpegMetaData(args(0)).exif.get  
-  val gpsIfd = exif.gpsIfd.get
-  val List(latDeg, latMin, latSec) = gpsIfd.value(GpsIfd.GPSLatitude)
-  val List(lonDeg, lonMin, lonSec) = gpsIfd.value(GpsIfd.GPSLongitude)
-  val latitude = latDeg.toDouble() + latMin.toDouble() / 60 + latSec.toDouble() /3600
-  val longitude = lonDeg.toDouble() + lonMin.toDouble() / 60 + lonSec.toDouble() / 3600
-  println("https://maps.google.com/maps?ll=%f,%f&ie=UTF8&z=16".format(latitude, longitude))
+  JpegMetaData(args(0)).exif.flatMap(_.gpsIfd).map(
+    ifd => (ifd.value(GpsIfd.GPSLatitude), ifd.value(GpsIfd.GPSLongitude))).map(t => toMapsUri(t._1, t._2)).
+    foreach(println)
+
+  def toMapsUri(latitudeTag: List[Rational], longitudeTag: List[Rational]): String = {
+    val List(latDeg, latMin, latSec) = latitudeTag
+    val List(lonDeg, lonMin, lonSec) = longitudeTag
+    val latitude = latDeg.toDouble() + latMin.toDouble() / 60 + latSec.toDouble() /3600
+    val longitude = lonDeg.toDouble() + lonMin.toDouble() / 60 + lonSec.toDouble() / 3600
+    s"https://maps.google.com/maps?ll=${latitude},${longitude}&ie=UTF8&z=16"
+  }
+
+  def value[I <: Ifd](ifd: I, tag: I#T): Option[U] = {
+    ifd.value(tag)
+  }
 }

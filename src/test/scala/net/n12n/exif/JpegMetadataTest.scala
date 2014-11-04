@@ -31,12 +31,12 @@ class JpegMetaDataTest extends FunSuite {
     assert(metadata.comments.length === 1, "Comment found")
   }
   
-  expect(8, "Orientation") {
+  expectResult(Orientation.LeftBottom, "Orientation") {
     val metadata = load("image-vertical.jpg")
     metadata.exif.get.orientation
   }
   
-  expect(Rational(48, 1), "GPS Data") {
+  expectResult(Rational(48, 1), "GPS Data") {
     val metadata = load("image-gps.jpg")
     val lat = for {
       exif <- metadata.exif
@@ -46,7 +46,7 @@ class JpegMetaDataTest extends FunSuite {
     lat.get
   }
   
-  expect(65, "All Attributes found") {
+  expectResult(65, "All Attributes found") {
     val metadata = load("image-gps.jpg")
     metadata.exif.get.allAttrs.length
   }

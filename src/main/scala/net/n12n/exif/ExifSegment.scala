@@ -94,8 +94,15 @@ class ExifSegment(length: Int, data: ByteSeq, offset: Int = 0)
    * 8 = The 0th row is the visual left-hand side of the image, and the 0th column is the visual bottom.
    * Other = reserved
    * }}}
+   * In case the EXIF segment does not contain a [net.n12n.exif.TiffIfd.Orientation] attribute or
+   * the value of the attribute is not in the range of 1 to 8 this field is set to 
+   * [net.n12n.exif.Orientation.TopLeft].
    */
-  val orientation: Int = ifd0.findValue(TiffIfd.Orientation).getOrElse(ExifSegment.DefaultOrientation)
+  val orientation: Orientation.Orientation = try {
+    Orientation(ifd0.findValue(TiffIfd.Orientation).getOrElse(ExifSegment.DefaultOrientation))
+  } catch {
+    case e: java.util.NoSuchElementException => Orientation(ExifSegment.DefaultOrientation)
+  }
   
   /**
    * Find attribute in 0th or 1st IFD.
