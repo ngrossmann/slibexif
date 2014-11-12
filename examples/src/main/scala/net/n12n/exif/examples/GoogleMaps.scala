@@ -20,8 +20,4 @@ object GoogleMaps extends App {
     val longitude = lonDeg.toDouble() + lonMin.toDouble() / 60 + lonSec.toDouble() / 3600
     s"https://maps.google.com/maps?ll=${latitude},${longitude}&ie=UTF8&z=16"
   }
-
-  def value[I <: Ifd](ifd: I, tag: I#T): Option[U] = {
-    ifd.value(tag)
-  }
 }

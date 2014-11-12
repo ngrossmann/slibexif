@@ -22,102 +22,103 @@ package net.n12n.exif
 
 import ByteOrder._
 import java.nio.charset.Charset
+import TypeConverter._
+
+class TypedTag2[T : TypeConverter](marker: Int, name: String) extends Tag(marker, name) {
+  def value(attr: IfdAttribute, order: ByteOrder): T = {
+    val genType = implicitly[TypeConverter[T]]
+    genType.toScala(attr, order)
+  }
+}
+
+class RationalTag2[Rational](marker: Int, name: String) extends TypedTag2(marker, name)
 
 /**
  * Tag identifying IFD attributes.
  * @param T The Scala type to which the tag is mapped.
  */
 trait TypedTag[T] extends Tag {
-  def value(attr: IfdAttribute, order: ByteOrder): T
-  def ifdAttribute(tagType: Type, count: Int, data: ByteSeq, order: ByteOrder) =
-    new GenericIfdAttribute(this, tagType, count, data, order)
-}
-
-trait GenericTag[T] extends TypedTag[T] {
-  val tagType: GenericType[T]
   /**
-   * Read value from `IfdAttribute`.
-   * @throws IllegalArgumentException if count is not 1 or [[net.n12n.exif.Type.stringLike]] is
-   *   `true`.
+   * Convert an `IfdAttribute` to its Scala representation.
+   * @param attr attribute.
+   * @param order byte order.
+   * @return Scala value.
    */
-  override def value(attr: IfdAttribute, order: ByteOrder): T = {
-    require(tagType == attr.tagType)
-    require(attr.count == 1 || tagType.stringLike)
-    tagType.toScala(attr.data, 0, order)
-  }  
+  def value(attr: IfdAttribute, order: ByteOrder): T
+
 }
 
-trait GenericListTag[T] extends TypedTag[List[T]] {
-  val tagType: GenericType[T]
-  override def value(attr: IfdAttribute, order: ByteOrder): List[T] = {
-    require(tagType == attr.tagType)
-    (for (i <- 0 until attr.count) yield tagType.toScala(attr.data, i * tagType.size, order)).toList
-  }
+trait ByteTag extends TypedTag[ByteSeq] {
+  override def value(attr: IfdAttribute, order: ByteOrder): ByteSeq = attr.data.slice(0, attr.data.length)
 }
 
-trait ByteTag extends GenericTag[ByteSeq] {
-  override val tagType = Type.Byte
+trait UndefinedTag extends TypedTag[ByteSeq] {
+  override def value(attr: IfdAttribute, order: ByteOrder): ByteSeq = attr.data.slice(0, attr.data.length)
 }
 
-trait UndefinedTag extends GenericTag[ByteSeq] {
-  override val tagType = Type.Undefined
+trait AsciiTag extends TypedTag[String] {
+  override def value(attr: IfdAttribute, order: ByteOrder): String = attr.data.zstring(0)
 }
 
-trait AsciiTag extends GenericTag[String] {
-  override val tagType = Type.Ascii
+trait LongListTag extends TypedTag[List[Long]] {
+  override def value(attr: IfdAttribute, order: ByteOrder): List[Long] =
+    (for (i <- 0 until attr.count) yield attr.data.toLong(i * 4, order)).toList
+
 }
 
-trait LongListTag extends GenericListTag[Long] {
-  override val tagType = Type.Long  
+trait LongTag extends TypedTag[Long] {
+  override def value(attr: IfdAttribute, order: ByteOrder): Long = attr.data.toLong(0, order)
 }
 
-trait LongTag extends GenericTag[Long] {
-  override val tagType = Type.Long
+trait ShortListTag extends TypedTag[List[Int]] {
+  override def value(attr: IfdAttribute, order: ByteOrder): List[Int] =
+    (for (i <- 0 until attr.count) yield attr.data.toShort(i * 2, order)).toList
 }
 
-trait ShortListTag extends GenericListTag[Int] {
-  override val tagType = Type.Short
+trait ShortTag extends TypedTag[Int] {
+  override def value(attr: IfdAttribute, order: ByteOrder): Int = attr.data.toShort(0, order)
 }
 
-trait ShortTag extends GenericTag[Int] {
-  override val tagType = Type.Short
+trait RationalListTag extends TypedTag[List[Rational]] {
+  val Size = 8
+
+  override def value(attr: IfdAttribute, order: ByteOrder): List[Rational] =
+    (for (i <- 0 until attr.count) yield attr.data.toRational(i * Size, order)).toList
 }
 
-trait RationalListTag extends GenericListTag[Rational] {
-  override val tagType = Type.Rational
+trait RationalTag extends TypedTag[Rational] {
+  val Size = 8
+
+  override def value(attr: IfdAttribute, order: ByteOrder): Rational = attr.data.toRational(0, order)
 }
 
-trait RationalTag extends GenericTag[Rational] {
-  override val tagType = Type.Rational
-}
+trait SignedRationalTag extends TypedTag[SignedRational] {
 
-trait SignedRationalTag extends GenericTag[SignedRational] {
-  override val tagType = Type.SRational
+  override def value(attr: IfdAttribute, order: ByteOrder): SignedRational = attr.data.toSignedRational(0, order)
 }
 
 trait NumericListTag extends TypedTag[List[Long]] {
-  val tagType = Type.Long
-  
+
   override def value(attr: IfdAttribute, order: ByteOrder) = {
-    if (attr.tagType == Type.Short) {
+    if (attr.typeId == Type.Short.id) {
       (for (i <- 0 until attr.count) yield 
           attr.data.toShort(i * Type.Short.size, order).toLong).toList
-    } else if (attr.tagType == Type.Long) {
+    } else if (attr.typeId == Type.Long.id) {
     	(for (i <- 0 until attr.count) yield attr.data.toLong(i * Type.Long.size, order)).toList
     } else
-      throw new IllegalArgumentException("Type %s not supported".format(attr.tagType))
+      throw new IllegalArgumentException("Type %d not supported".format(attr.typeId))
   }
 }
 
 trait NumericTag extends TypedTag[Long] {
   override def value(attr: IfdAttribute, order: ByteOrder) = {
     require(attr.count == 1)
-    if (attr.tagType == Type.Short)
+    if (attr.typeId == Type.Short.id)
       attr.data.toShort(0, order)
-    else if (attr.tagType == Type.Long)
+    else if (attr.typeId == Type.Long.id)
       attr.data.toLong(0, order)
     else
-      throw new IllegalArgumentException("Type %s not supported".format(attr.tagType))
+      throw new IllegalArgumentException("Type %d not supported".format(attr.typeId))
   }
 }
 

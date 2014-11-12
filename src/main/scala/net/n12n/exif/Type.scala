@@ -57,7 +57,7 @@ object Type {
   val Byte = new GenericType[ByteSeq](1, 1, "BYTE", true) {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.slice(offset, data.length)
   }
-  /** One byte character. */ 
+  /** One byte character. */
   val Ascii = new GenericType[String](2, 1, "ASCII", true) {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.zstring(offset)
   }
@@ -65,12 +65,12 @@ object Type {
   val Short = new GenericType[Int](3, 2, "SHORT") {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toShort(offset, order)
   }
-  
+
   /** A 4 byte unsigned integer. */
   val Long = new GenericType[Long](4, 4, "LONG") {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toLong(offset, order)
   }
-  /** A rational value made up of two `net.n12n.exif.Type.Long` values. */ 
+  /** A rational value made up of two `net.n12n.exif.Type.Long` values. */
   val Rational = new GenericType[Rational](5, 8, "RATIONAL") {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toRational(offset, order)
   }
@@ -82,7 +82,7 @@ object Type {
   val SLong = new GenericType[Int](9, 4, "SLONG") {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toSignedLong(offset, order)
   }
-  /** Signed rational, two 4 byte integers. */ 
+  /** Signed rational, two 4 byte integers. */
   val SRational = new GenericType[SignedRational](10, 8, "SRATIONAL") {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toSignedRational(offset, order)
   }
@@ -90,13 +90,15 @@ object Type {
   val Unknown = new GenericType[ByteSeq](11, 1, "UNKNOWN", true) {
     override def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.slice(offset, data.length)
   }
-  
+
   val values = Seq(Byte, Ascii, Short, Long, Rational, Undefined, SLong, SRational)
-  
+
   def value(id: Int): Type = {
     values.find(_.id == id) match {
       case Some(t) => t
       case None => Unknown
     }
   }
+
+  def size(typeId: Int): Int = value(typeId).size
 }
