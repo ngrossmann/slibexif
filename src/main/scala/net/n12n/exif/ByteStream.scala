@@ -21,7 +21,7 @@ package net.n12n.exif
 
 import java.io.InputStream
 
-class ByteStream(in: InputStream) extends Iterator[Int] {
+private[exif]  class ByteStream(in: InputStream) extends Iterator[Int] {
   private var peek = in.read()
   override def next(): Int = if (peek != -1) {
       val b = peek

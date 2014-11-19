@@ -19,12 +19,17 @@
  */
 package net.n12n.exif
 
+trait Tag {
+  def marker: Int
+  def name: String
+}
+
 /**
  * Create a marker tag.
  * @param marker Marking 2-byte sequence, must be in range 0x0 <= marker < 0x10000.
  * @param name Tag name. 
  */
-abstract class Tag(val marker: Int, val name: String) {
+abstract class TagImpl(val marker: Int, val name: String) extends Tag {
   require(marker < 0x10000 && marker >= 0)
   
   /**

@@ -23,88 +23,76 @@ package net.n12n.exif
  * IFD defined by EXIF standard.
  * 
  * @param exif The Exif segment containing this IFD.
- * @param offset Start of this IFD relative to the [[net.n12n.exif.ExifSegment#tiffOffset]].
+ * @param offset Start of this IFD relative to the ``tiffOffset``.
  */
 class ExifIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "Exif IFD") {
-  override type T = ExifTag
+  override type TagType = ExifTag[_]
   override val Tags = ExifIfd.Tags
-  override protected def createTag(marker: Int, tagType: Type, count: Int) = {
-    tagType match {
-      case Type.Ascii => new T(marker, "Unknown") with AsciiTag
-      case Type.Byte => new T(marker, "Unknown") with ByteTag
-      case Type.Undefined => new T(marker, "Unknown") with UndefinedTag
-      case Type.Long if (count == 1) => new T(marker, "Unknown") with LongTag
-      case Type.Long => new T(marker, "Unknown") with LongListTag
-      case Type.Short if (count == 1) => new T(marker, "Unkown") with ShortTag
-      case Type.Short => new T(marker, "Unknown") with ShortListTag
-      case _ => throw new IllegalArgumentException("Tag %x of type %s".format(marker, tagType))
-    } 
-  }
 }
 
-class ExifTag(marker: Int, name: String) extends Tag(marker, name)
+trait ExifTag[T] extends TypedTag[T]
 
 object ExifIfd {
   
-  val PixelXDimension = new ExifTag(40962, "PixelXDimension") with NumericTag
-  val PixelYDimension = new ExifTag(40963, "PixelYDimension") with NumericTag
-  val ComponentsConfiguration = new ExifTag(37121, "ComponentsConfiguration") with UndefinedTag
-  val CompressedBitsPerPixel = new ExifTag(37122, "CompressedBitsPerPixel") with RationalTag
-  val ExifVersion = new ExifTag(36864, "ExifVersion") with UndefinedTag
-  val FlashpixVersion = new ExifTag(40960, "FlashpixVersion") with UndefinedTag
-  val ColorSpace = new ExifTag(40961, "ColorSpace") with ShortTag
-  val MakerNote = new ExifTag(37500, "MakerNote") with UndefinedTag
-  val UserComment = new ExifTag(37510, "UserComment") with UserCommentTag
-  val RelatedSoundFile = new ExifTag(40964, "RelatedSoundFile") with AsciiTag
-  val DateTimeOriginal = new ExifTag(36867, "DateTimeOriginal") with AsciiTag
-  val DateTimeDigitized = new ExifTag(36868, "DateTimeDigitized") with AsciiTag
-  val SubSecTime = new ExifTag(37520, "SubSecTime") with AsciiTag
-  val SubSecTimeOriginal = new ExifTag(37521, "SubSecTimeOriginal") with AsciiTag
-  val SubSecTimeDigitized = new ExifTag(37522, "SubSecTimeDigitized") with AsciiTag
-  val ImageUniqueID = new ExifTag(42016, "ImageUniqueID") with AsciiTag
+  val PixelXDimension = new NumericTag(40962, "PixelXDimension") with ExifTag[Numeric]
+  val PixelYDimension = new NumericTag(40963, "PixelYDimension") with ExifTag[Numeric]
+  val ComponentsConfiguration = new UndefinedTag(37121, "ComponentsConfiguration") with ExifTag[ByteSeq]
+  val CompressedBitsPerPixel = new RationalTag(37122, "CompressedBitsPerPixel") with ExifTag[Rational]
+  val ExifVersion = new UndefinedTag(36864, "ExifVersion") with ExifTag[ByteSeq]
+  val FlashpixVersion = new UndefinedTag(40960, "FlashpixVersion") with ExifTag[ByteSeq]
+  val ColorSpace = new ShortTag(40961, "ColorSpace") with ExifTag[Int]
+  val MakerNote = new UndefinedTag(37500, "MakerNote") with ExifTag[ByteSeq]
+  val UserComment = new UserCommentTag(37510, "UserComment") with ExifTag[MultiByteString]
+  val RelatedSoundFile = new AsciiTag(40964, "RelatedSoundFile") with ExifTag[String]
+  val DateTimeOriginal = new AsciiTag(36867, "DateTimeOriginal") with ExifTag[String]
+  val DateTimeDigitized = new AsciiTag(36868, "DateTimeDigitized") with ExifTag[String]
+  val SubSecTime = new AsciiTag(37520, "SubSecTime") with ExifTag[String]
+  val SubSecTimeOriginal = new AsciiTag(37521, "SubSecTimeOriginal") with ExifTag[String]
+  val SubSecTimeDigitized = new AsciiTag(37522, "SubSecTimeDigitized") with ExifTag[String]
+  val ImageUniqueID = new AsciiTag(42016, "ImageUniqueID") with ExifTag[String]
 
-  val ExposureTime = new ExifTag(33434, "ExposureTime") with RationalTag
-  val FNumber = new ExifTag(33437, "FNumber") with RationalTag
-  val ExposureProgram = new ExifTag(34850, "ExposureProgram") with ShortTag
-  val SpectralSensitivity = new ExifTag(34852, "SpectralSensitivity") with AsciiTag
-  val ISOSpeedRatings = new ExifTag(34855, "ISOSpeedRatings") with ShortListTag
-  val OECF = new ExifTag(34856, "OECF") with UndefinedTag
-  val ShutterSpeedValue = new ExifTag(37377, "ShutterSpeedValue") with SignedRationalTag
-  val ApertureValue = new ExifTag(37378, "ApertureValue") with RationalTag
-  val BrightnessValue = new ExifTag(37379, "BrightnessValue") with SignedRationalTag
-  val ExposureBiasValue = new ExifTag(37380, "ExposureBiasValue") with SignedRationalTag
-  val MaxApertureValue = new ExifTag(37381, "MaxApertureValue") with RationalTag
-  val SubjectDistance = new ExifTag(37382, "SubjectDistance") with RationalTag
-  val MeteringMode = new ExifTag(37383, "MeteringMode") with ShortTag
-  val LightSource = new ExifTag(37384, "LightSource") with ShortTag
-  val Flash = new ExifTag(37385, "Flash") with ShortTag
-  val FocalLength = new ExifTag(37386, "FocalLength") with RationalTag
-  val SubjectArea = new ExifTag(37396, "SubjectArea") with ShortListTag
-  val FlashEnergy = new ExifTag(41483, "FlashEnergy") with RationalTag
-  val SpatialFrequencyResponse = new ExifTag(41484, "SpatialFrequencyResponse") with UndefinedTag
-  val FocalPlaneXResolution = new ExifTag(41486, "FocalPlaneXResolution") with RationalTag
-  val FocalPlaneYResolution = new ExifTag(41487, "FocalPlaneYResolution") with RationalTag
-  val FocalPlaneResolutionUnit = new ExifTag(41488, "FocalPlaneResolutionUnit") with ShortTag
-  val SubjectLocation = new ExifTag(41492, "SubjectLocation") with ShortListTag
-  val ExposureIndex = new ExifTag(41493, "ExposureIndex") with RationalTag
-  val SensingMethod = new ExifTag(41495, "SensingMethod") with ShortTag
-  val FileSource = new ExifTag(41728, "FileSource") with UndefinedTag
-  val SceneType = new ExifTag(41729, "SceneType") with UndefinedTag
-  val CFAPattern = new ExifTag(41730, "CFAPattern") with UndefinedTag
-  val CustomRendered = new ExifTag(41985, "CustomRendered") with ShortTag
-  val ExposureMode = new ExifTag(41986, "ExposureMode") with ShortTag
-  val WhiteBalance = new ExifTag(41987, "WhiteBalance") with ShortTag
-  val DigitalZoomRatio = new ExifTag(41988, "DigitalZoomRatio") with RationalTag
-  val FocalLengthIn35mmFilm = new ExifTag(41989, "FocalLengthIn35mmFilm") with ShortTag
-  val SceneCaptureType = new ExifTag(41990, "SceneCaptureType") with ShortTag
-  val GainControl = new ExifTag(41991, "GainControl") with RationalTag
-  val Contrast = new ExifTag(41992, "Contrast") with ShortTag
-  val Saturation = new ExifTag(41993, "Saturation") with ShortTag
-  val Sharpness = new ExifTag(41994, "Sharpness") with ShortTag
-  val DeviceSettingDescription = new ExifTag(41995, "DeviceSettingDescription") with UndefinedTag
-  val SubjectDistanceRange = new ExifTag(41996, "SubjectDistanceRange") with ShortTag
+  val ExposureTime = new RationalTag(33434, "ExposureTime") with ExifTag[Rational]
+  val FNumber = new RationalTag(33437, "FNumber") with ExifTag[Rational]
+  val ExposureProgram = new ShortTag(34850, "ExposureProgram") with ExifTag[Int]
+  val SpectralSensitivity = new AsciiTag(34852, "SpectralSensitivity") with ExifTag[String]
+  val ISOSpeedRatings = new ShortListTag(34855, "ISOSpeedRatings") with ExifTag[List[Int]]
+  val OECF = new UndefinedTag(34856, "OECF") with ExifTag[ByteSeq]
+  val ShutterSpeedValue = new SignedRationalTag(37377, "ShutterSpeedValue") with ExifTag[SignedRational]
+  val ApertureValue = new RationalTag(37378, "ApertureValue") with ExifTag[Rational]
+  val BrightnessValue = new SignedRationalTag(37379, "BrightnessValue") with ExifTag[SignedRational]
+  val ExposureBiasValue = new SignedRationalTag(37380, "ExposureBiasValue") with ExifTag[SignedRational]
+  val MaxApertureValue = new RationalTag(37381, "MaxApertureValue") with ExifTag[Rational]
+  val SubjectDistance = new RationalTag(37382, "SubjectDistance") with ExifTag[Rational]
+  val MeteringMode = new ShortTag(37383, "MeteringMode") with ExifTag[Int]
+  val LightSource = new ShortTag(37384, "LightSource") with ExifTag[Int]
+  val Flash = new ShortTag(37385, "Flash") with ExifTag[Int]
+  val FocalLength = new RationalTag(37386, "FocalLength") with ExifTag[Rational]
+  val SubjectArea = new ShortListTag(37396, "SubjectArea") with ExifTag[List[Int]]
+  val FlashEnergy = new RationalTag(41483, "FlashEnergy") with ExifTag[Rational]
+  val SpatialFrequencyResponse = new UndefinedTag(41484, "SpatialFrequencyResponse") with ExifTag[ByteSeq]
+  val FocalPlaneXResolution = new RationalTag(41486, "FocalPlaneXResolution") with ExifTag[Rational]
+  val FocalPlaneYResolution = new RationalTag(41487, "FocalPlaneYResolution") with ExifTag[Rational]
+  val FocalPlaneResolutionUnit = new ShortTag(41488, "FocalPlaneResolutionUnit") with ExifTag[Int]
+  val SubjectLocation = new ShortListTag(41492, "SubjectLocation") with ExifTag[List[Int]]
+  val ExposureIndex = new RationalTag(41493, "ExposureIndex") with ExifTag[Rational]
+  val SensingMethod = new ShortTag(41495, "SensingMethod") with ExifTag[Int]
+  val FileSource = new UndefinedTag(41728, "FileSource") with ExifTag[ByteSeq]
+  val SceneType = new UndefinedTag(41729, "SceneType") with ExifTag[ByteSeq]
+  val CFAPattern = new UndefinedTag(41730, "CFAPattern") with ExifTag[ByteSeq]
+  val CustomRendered = new ShortTag(41985, "CustomRendered") with ExifTag[Int]
+  val ExposureMode = new ShortTag(41986, "ExposureMode") with ExifTag[Int]
+  val WhiteBalance = new ShortTag(41987, "WhiteBalance") with ExifTag[Int]
+  val DigitalZoomRatio = new RationalTag(41988, "DigitalZoomRatio") with ExifTag[Rational]
+  val FocalLengthIn35mmFilm = new ShortTag(41989, "FocalLengthIn35mmFilm") with ExifTag[Int]
+  val SceneCaptureType = new ShortTag(41990, "SceneCaptureType") with ExifTag[Int]
+  val GainControl = new RationalTag(41991, "GainControl") with ExifTag[Rational]
+  val Contrast = new ShortTag(41992, "Contrast") with ExifTag[Int]
+  val Saturation = new ShortTag(41993, "Saturation") with ExifTag[Int]
+  val Sharpness = new ShortTag(41994, "Sharpness") with ExifTag[Int]
+  val DeviceSettingDescription = new UndefinedTag(41995, "DeviceSettingDescription") with ExifTag[ByteSeq]
+  val SubjectDistanceRange = new ShortTag(41996, "SubjectDistanceRange") with ExifTag[Int]
   
-  val Tags = Set[ExifTag with TypedTag[_]](PixelXDimension, PixelYDimension,
+  val Tags = Set[ExifTag[_]](PixelXDimension, PixelYDimension,
     ComponentsConfiguration, CompressedBitsPerPixel, ExifVersion, FlashpixVersion, ColorSpace,
     MakerNote, UserComment, RelatedSoundFile, DateTimeOriginal, DateTimeDigitized, SubSecTime,
     SubSecTimeOriginal, SubSecTimeDigitized, ImageUniqueID,

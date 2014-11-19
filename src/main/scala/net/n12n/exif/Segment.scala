@@ -20,7 +20,7 @@
 package net.n12n.exif
 
 object Segment {
-  class Marker(marker: Int, name: String) extends Tag(marker, name)
+  class Marker(marker: Int, name: String) extends TagImpl(marker, name)
   val JfifMarker = new Marker(0xffe0, "JFIF")
   val App1Marker = new Marker(0xffe1, "APP1")
   val App2Marker = new Marker(0xffe2, "APP2")

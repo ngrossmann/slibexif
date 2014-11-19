@@ -8,10 +8,12 @@ import java.io.FileInputStream
  * taken in Google maps. Call with path to jpeg file as single argument.
  */
 object GoogleMaps extends App {
-  require(args.length == 1)
-  JpegMetaData(args(0)).exif.flatMap(_.gpsIfd).map(
-    ifd => (ifd.value(GpsIfd.GPSLatitude), ifd.value(GpsIfd.GPSLongitude))).map(t => toMapsUri(t._1, t._2)).
-    foreach(println)
+  val uri = for {
+    exif <- JpegMetaData(args(0)).exif
+    lat <- exif.value(GpsIfd.GPSLatitude)
+    lng <- exif.value(GpsIfd.GPSLongitude)
+  } yield toMapsUri(lat, lng)
+  println(uri)
 
   def toMapsUri(latitudeTag: List[Rational], longitudeTag: List[Rational]): String = {
     val List(latDeg, latMin, latSec) = latitudeTag

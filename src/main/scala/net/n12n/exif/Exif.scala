@@ -6,7 +6,7 @@ import java.io.IOException
  */
 object Exif extends App {
   try {
-	if (args.length != 1) 
+  	if (args.length != 1)
       usage()
     val image = JpegMetaData(args(0))
     for (exif <- image.exif) {
@@ -16,7 +16,7 @@ object Exif extends App {
     }
   } catch {
     case e: IOException => 
-      System.err.println("Faild to open %s for reading".format(args(0)))
+      System.err.println("Failed to open %s for reading".format(args(0)))
       System.exit(2)
   }
   
