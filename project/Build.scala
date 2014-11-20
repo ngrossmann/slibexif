@@ -9,7 +9,6 @@ object LibExifBuild extends Build {
   override lazy val settings = super.settings ++ Seq(
       libraryDependencies ++= dependencies,
       organization := "net.n12n.exif",
-      version in ThisBuild := "0.2.0-SNAPSHOT",
       scalaVersion in ThisBuild := "2.11.4",
       scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
       scalacOptions in doc ++= Seq("-diagrams", "-doc-title Scala Exif Library", "-implicits"),
