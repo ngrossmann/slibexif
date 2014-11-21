@@ -60,8 +60,8 @@ object GpsIfd {
   val GPSDestBearing = new RationalListTag(24, "GPSDestBearing") with GpsTag[List[Rational]]
   val GPSDestDistanceRef = new AsciiTag(25, "GPSDestDistanceRef") with GpsTag[String]
   val GPSDestDistance = new RationalTag(26, "GPSDestDistance") with GpsTag[Rational]
-  val GPSProcessingMethod = new UndefinedTag(27, "GPSProcessingMethod") with GpsTag[ByteSeq]
-  val GPSAreaInformation = new UndefinedTag(28, "GPSAreaInformation") with GpsTag[ByteSeq]
+  val GPSProcessingMethod = new UndefinedTag(27, "GPSProcessingMethod") with GpsTag[Undefined]
+  val GPSAreaInformation = new UndefinedTag(28, "GPSAreaInformation") with GpsTag[Undefined]
   val GPSDateStamp = new AsciiTag(29, "GPSDateStamp") with GpsTag[String]
   val GPSDifferential = new ShortTag(30, "GPSDifferential") with GpsTag[Int]
   val Tags = Set[GpsTag[_]](GPSVersionID,

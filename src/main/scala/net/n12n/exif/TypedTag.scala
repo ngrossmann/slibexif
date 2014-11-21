@@ -44,7 +44,7 @@ private[exif] class ListTag[T : TypeConverter](marker: Int, name: String) extend
 
 class ByteTag(marker: Int, name: String) extends ValueTag[ByteSeq](marker, name)
 
-class UndefinedTag(marker: Int, name: String) extends ValueTag[ByteSeq](marker, name)
+class UndefinedTag(marker: Int, name: String) extends ValueTag[Undefined](marker, name)
 
 class AsciiTag(marker: Int, name: String) extends ValueTag[String](marker, name)
 

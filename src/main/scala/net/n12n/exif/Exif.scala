@@ -8,25 +8,17 @@ object Exif extends App {
   try {
   	if (args.length != 1)
       usage()
-    val image = JpegMetaData(args(0))
-    for (exif <- image.exif) {
-      println("Exif (length: %d):".format(exif.length))
-      exif.ifds.foreach(printIfd)
-      val xres: Rational = exif.ifd0.value(TiffIfd.XResolution)
-    }
+
+    JpegMetaData(args(0)).exif.foreach(_.ifds.flatMap(_.attributes).foreach(
+      attr => println(s"${attr.tag.name}: ${attr.value}")))
   } catch {
     case e: IOException => 
-      System.err.println("Failed to open %s for reading".format(args(0)))
+      System.err.println(s"Failed to open ${args(0)} for reading")
       System.exit(2)
   }
   
   private def usage() {
     System.err.println("Usage: Exif <path>")
     System.exit(1)
-  }
-  
-  private def printIfd(ifd: Ifd) {
-    println("IFD: %s".format(ifd.name))
-    ifd.attributes.foreach(a => println("  %s: %s".format(a.tag.name, a.value)))
   }
 }

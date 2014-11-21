@@ -11,7 +11,10 @@ private[exif] trait TypeConverter[T] {
 private[exif] abstract class SimpleTypeConverter[T](val id: Int, val size: Int, val name: String,
                                                       val stringLike: Boolean = false) extends TypeConverter[T] {
   def toScala(attr: IfdAttribute, order: ByteOrder): List[T] = {
-    require(attr.typeId == id)
+    if (attr.typeId != id) {
+      throw new IllegalArgumentException(
+        s"Expected type ID ${id} but found ${attr.typeId} for IFD attribute ${attr.tag}")
+    }
     if (stringLike) {
       List(toScala(attr.data, 0, order))
     } else {
@@ -42,6 +45,11 @@ private[exif] object TypeConverter {
 
   implicit val shortConverter = new SimpleTypeConverter[Int](3, 2, "SHORT") {
     override protected def toScala(data: ByteSeq, offset: Int, order: ByteOrder) = data.toShort(offset, order)
+  }
+
+  implicit val undefinedConverter = new SimpleTypeConverter[Undefined](7, 1, "UNDEFINED", true) {
+    override protected def toScala(data: ByteSeq, offset: Int, order: ByteOrder) =
+      new Undefined(data.slice(offset, data.length - offset).toArray())
   }
 
   implicit val signedRationalConverter = new SimpleTypeConverter[SignedRational](10,  8, "SRATIONAL") {
