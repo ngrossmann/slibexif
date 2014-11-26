@@ -27,16 +27,25 @@ object LibExifBuild extends Build {
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     },
     credentials += Credentials(Path.userHome / ".sbt" / "sonatype"),
-    pomExtra := <licenses>
-      <license>
-        <name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
-        <url>http://www.gnu.org/licenses/lgpl.txt</url>
-        <distribution>repo</distribution>
-      </license>
-    </licenses>
+    pomExtra := <url>https://github.com/ngrossmann/slibexif</url>
+      <licenses>
+        <license>
+          <name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+          <url>http://www.gnu.org/licenses/lgpl.txt</url>
+          <distribution>repo</distribution>
+        </license>
+      </licenses>
       <scm>
         <url>https://github.com/ngrossmann/slibexif</url>
       </scm>
+      <developers>
+        <developer>
+          <id>ngrossmann</id>
+          <name>Niklas Grossmann</name>
+          <url>https://github.com/ngrossmann</url>
+        </developer>
+      </developers>
+
   )
 
   lazy val slibexif = Project(id = "slibexif", base = file("."), settings = slibexifSettings)
