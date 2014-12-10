@@ -1,10 +1,10 @@
 /* 
- * libexif - Scala library to parse JPEG EXIF data.
+ * slibexif - Scala library to parse JPEG EXIF data.
  * Copyright (C) Niklas Grossmann
  * 
  * This file is part of libexif.
  *
- * libexif is free software: you can redistribute it and/or modify
+ * slibexif is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.

@@ -60,3 +60,10 @@ JPEGInterchangeFormatLength: 3482
 ExposureTime: 862/1000000
 ...
 ```
+
+Using slibexif
+--------------
+
+slibexif for Scala 2.10 and 2.11 is available on the
+[Maven Central repository](http://search.maven.org/#search|ga|1|g%3A%22net.n12n.exif%22), just add
+`libraryDependencies += "net.n12n.exif" %% "slibexif" % "0.3.1"` to your build.
