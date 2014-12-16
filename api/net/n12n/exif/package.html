@@ -1,0 +1,1017 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>exif - net.n12n.exif</title>
+          <meta name="description" content="exif - net.n12n.exif" />
+          <meta name="keywords" content="exif net.n12n.exif" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'net.n12n.exif.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../../lib/package_big.png" />
+        <p id="owner"><a href="../../package.html" class="extype" name="net">net</a>.<a href="../package.html" class="extype" name="net.n12n">n12n</a></p>
+        <h1>exif</h1> <span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">exif</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Library to read EXIF meta-data.</p><p>Main entry point is <a href="JpegMetaData.html" class="extype" name="net.n12n.exif.JpegMetaData">net.n12n.exif.JpegMetaData</a> and its companion object.</p><p>Basic structure of JPEG meta-data is:</p><ul><li><a href="Segment.html" class="extype" name="net.n12n.exif.Segment">net.n12n.exif.Segment</a>s:<ul><li><a href="ComSegment.html" class="extype" name="net.n12n.exif.ComSegment">net.n12n.exif.ComSegment</a>: Segment containing text comments.</li><li><a href="ExifSegment.html" class="extype" name="net.n12n.exif.ExifSegment">net.n12n.exif.ExifSegment</a>: Exif data.<ul><li><a href="Ifd.html" class="extype" name="net.n12n.exif.Ifd">net.n12n.exif.Ifd</a>: Image file directory structure containing <a href="IfdAttribute.html" class="extype" name="net.n12n.exif.IfdAttribute">net.n12n.exif.IfdAttribute</a>s.</li></ul></li></ul></li></ul><p>There are three types of IFDs, <a href="TiffIfd.html" class="extype" name="net.n12n.exif.TiffIfd">net.n12n.exif.TiffIfd</a>, <a href="ExifIfd.html" class="extype" name="net.n12n.exif.ExifIfd">net.n12n.exif.ExifIfd</a> and
+<a href="GpsIfd.html" class="extype" name="net.n12n.exif.GpsIfd">net.n12n.exif.GpsIfd</a>.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="net.n12n.exif"><span>exif</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="net.n12n.exif.AsciiTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AsciiTagextendsValueTag[String]"></a>
+      <a id="AsciiTag:AsciiTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="AsciiTag.html"><span class="name">AsciiTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@AsciiTagextendsValueTag[String]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.AttributeNotFoundException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AttributeNotFoundExceptionextendsExceptionwithProductwithSerializable"></a>
+      <a id="AttributeNotFoundException:AttributeNotFoundException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="AttributeNotFoundException.html"><span class="name">AttributeNotFoundException</span></a><span class="params">(<span name="tag">tag: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@AttributeNotFoundExceptionextendsExceptionwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exception thrown by <a href="Ifd.html" class="extype" name="net.n12n.exif.Ifd">net.n12n.exif.Ifd</a> <code><code>attr</code></code> methods in case the attribute was not found.</p>
+    </li><li name="net.n12n.exif.ByteSeq" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ByteSeqextendsAnyRef"></a>
+      <a id="ByteSeq:ByteSeq"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ByteSeq.html"><span class="name">ByteSeq</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ByteSeqextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A sequence of bytes which may be converted to different types.</p>
+    </li><li name="net.n12n.exif.ByteTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ByteTagextendsValueTag[net.n12n.exif.ByteSeq]"></a>
+      <a id="ByteTag:ByteTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ByteTag.html"><span class="name">ByteTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="ByteSeq.html" class="extype" name="net.n12n.exif.ByteSeq">ByteSeq</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ByteTagextendsValueTag[net.n12n.exif.ByteSeq]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.ComSegment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ComSegmentextendsSegment"></a>
+      <a id="ComSegment:ComSegment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ComSegment.html"><span class="name">ComSegment</span></a><span class="result"> extends <a href="Segment.html" class="extype" name="net.n12n.exif.Segment">Segment</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ComSegmentextendsSegment" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.ExifIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExifIfdextendsIfd"></a>
+      <a id="ExifIfd:ExifIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ExifIfd.html"><span class="name">ExifIfd</span></a><span class="result"> extends <a href="Ifd.html" class="extype" name="net.n12n.exif.Ifd">Ifd</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ExifIfdextendsIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">IFD defined by EXIF standard.</p>
+    </li><li name="net.n12n.exif.ExifSegment" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ExifSegmentextendsSegment"></a>
+      <a id="ExifSegment:ExifSegment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ExifSegment.html"><span class="name">ExifSegment</span></a><span class="result"> extends <a href="Segment.html" class="extype" name="net.n12n.exif.Segment">Segment</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ExifSegmentextendsSegment" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Exif segment.</p><div class="fullcomment"><div class="comment cmt"><p>Exif segment.
+An Exif segment contains at least one IFD (Image File Directory), the first IFD, called
+<i>0thIFD</i> is mandatory all others are optional.</p><p>To see which attributes are defined in which IFD check the corresponding companion objects
+<a href="TiffIfd.html" class="extype" name="net.n12n.exif.TiffIfd">net.n12n.exif.TiffIfd</a>, <a href="ExifIfd.html" class="extype" name="net.n12n.exif.ExifIfd">net.n12n.exif.ExifIfd</a> and <a href="GpsIfd.html" class="extype" name="net.n12n.exif.GpsIfd">net.n12n.exif.GpsIfd</a>.
+</p></div></div>
+    </li><li name="net.n12n.exif.ExifTag" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ExifTag[T]extendsTypedTag[T]"></a>
+      <a id="ExifTag[T]:ExifTag[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ExifTag.html"><span class="name">ExifTag</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="TypedTag.html" class="extype" name="net.n12n.exif.TypedTag">TypedTag</a>[<span class="extype" name="net.n12n.exif.ExifTag.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ExifTag[T]extendsTypedTag[T]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.GenericType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="GenericType[T]extendsType"></a>
+      <a id="GenericType[T]:GenericType[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="GenericType.html"><span class="name">GenericType</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Type.html" class="extype" name="net.n12n.exif.Type">Type</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@GenericType[T]extendsType" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Generic IFD attribute type.</p>
+    </li><li name="net.n12n.exif.GpsIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GpsIfdextendsIfd"></a>
+      <a id="GpsIfd:GpsIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="GpsIfd.html"><span class="name">GpsIfd</span></a><span class="result"> extends <a href="Ifd.html" class="extype" name="net.n12n.exif.Ifd">Ifd</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@GpsIfdextendsIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">IFD for GPS related data.</p>
+    </li><li name="net.n12n.exif.GpsTag" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="GpsTag[T]extendsTypedTag[T]"></a>
+      <a id="GpsTag[T]:GpsTag[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="GpsTag.html"><span class="name">GpsTag</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="TypedTag.html" class="extype" name="net.n12n.exif.TypedTag">TypedTag</a>[<span class="extype" name="net.n12n.exif.GpsTag.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@GpsTag[T]extendsTypedTag[T]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Marker trait for GPS IFD tags.</p><div class="fullcomment"><div class="comment cmt"><p>Marker trait for GPS IFD tags.</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>
+</p></dd></dl></div>
+    </li><li name="net.n12n.exif.Ifd" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="IfdextendsAnyRef"></a>
+      <a id="Ifd:Ifd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Ifd.html"><span class="name">Ifd</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@IfdextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Image-File-Directory (IFD) structure.</p><div class="fullcomment"><div class="comment cmt"><p>Image-File-Directory (IFD) structure.
+An IFD is a container for <a href="IfdAttribute.html" class="extype" name="net.n12n.exif.IfdAttribute">net.n12n.exif.IfdAttribute</a>s.
+</p></div></div>
+    </li><li name="net.n12n.exif.IfdAttribute" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="IfdAttributeextendsAnyRef"></a>
+      <a id="IfdAttribute:IfdAttribute"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="IfdAttribute.html"><span class="name">IfdAttribute</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@IfdAttributeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Meta-data attributes, containing the actual data.</p><div class="fullcomment"><div class="comment cmt"><p>Meta-data attributes, containing the actual data.
+An IFD attribute is identified by a <a href="Tag.html" class="extype" name="net.n12n.exif.Tag">net.n12n.exif.Tag</a> and a type, they contain either a single value
+of the given type or a sequence of values.</p></div></div>
+    </li><li name="net.n12n.exif.JpegMetaData" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JpegMetaDataextendsAnyRef"></a>
+      <a id="JpegMetaData:JpegMetaData"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="JpegMetaData.html"><span class="name">JpegMetaData</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@JpegMetaDataextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Read read JPEG meta-data.</p>
+    </li><li name="net.n12n.exif.LongListTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LongListTagextendsListTag[Long]"></a>
+      <a id="LongListTag:LongListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="LongListTag.html"><span class="name">LongListTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ListTag">ListTag</span>[<span class="extype" name="scala.Long">Long</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@LongListTagextendsListTag[Long]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.LongTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LongTagextendsValueTag[Long]"></a>
+      <a id="LongTag:LongTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="LongTag.html"><span class="name">LongTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<span class="extype" name="scala.Long">Long</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@LongTagextendsValueTag[Long]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.MultiByteString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiByteStringextendsProductwithSerializable"></a>
+      <a id="MultiByteString:MultiByteString"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="MultiByteString.html"><span class="name">MultiByteString</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="charset">charset: <span class="extype" name="java.nio.charset.Charset">Charset</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@MultiByteStringextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Numeric" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="NumericextendsProductwithSerializable"></a>
+      <a id="Numeric:Numeric"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Numeric.html"><span class="name">Numeric</span></a><span class="params">(<span name="value">value: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@NumericextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Numeric value.</p><div class="fullcomment"><div class="comment cmt"><p>Numeric value.
+Tags of this type can be either short or integer.</p></div><dl class="paramcmts block"><dt class="param">value</dt><dd class="cmt"><p>value as long.
+</p></dd></dl></div>
+    </li><li name="net.n12n.exif.NumericListTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NumericListTagextendsListTag[net.n12n.exif.Numeric]"></a>
+      <a id="NumericListTag:NumericListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NumericListTag.html"><span class="name">NumericListTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ListTag">ListTag</span>[<a href="Numeric.html" class="extype" name="net.n12n.exif.Numeric">Numeric</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@NumericListTagextendsListTag[net.n12n.exif.Numeric]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.NumericTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NumericTagextendsValueTag[net.n12n.exif.Numeric]"></a>
+      <a id="NumericTag:NumericTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NumericTag.html"><span class="name">NumericTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="Numeric.html" class="extype" name="net.n12n.exif.Numeric">Numeric</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@NumericTagextendsValueTag[net.n12n.exif.Numeric]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Rational" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RationalextendsProductwithSerializable"></a>
+      <a id="Rational:Rational"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Rational.html"><span class="name">Rational</span></a><span class="params">(<span name="numerator">numerator: <span class="extype" name="scala.Long">Long</span></span>, <span name="denominator">denominator: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@RationalextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.RationalListTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RationalListTagextendsListTag[net.n12n.exif.Rational]"></a>
+      <a id="RationalListTag:RationalListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RationalListTag.html"><span class="name">RationalListTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ListTag">ListTag</span>[<a href="Rational.html" class="extype" name="net.n12n.exif.Rational">Rational</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@RationalListTagextendsListTag[net.n12n.exif.Rational]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.RationalTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RationalTagextendsValueTag[net.n12n.exif.Rational]"></a>
+      <a id="RationalTag:RationalTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RationalTag.html"><span class="name">RationalTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="Rational.html" class="extype" name="net.n12n.exif.Rational">Rational</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@RationalTagextendsValueTag[net.n12n.exif.Rational]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Segment" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SegmentextendsAnyRef"></a>
+      <a id="Segment:Segment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Segment.html"><span class="name">Segment</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@SegmentextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A segment is a byte sequence starting with a two byte marker, a two byte length field
+followed by data.</p><div class="fullcomment"><div class="comment cmt"><p>A segment is a byte sequence starting with a two byte marker, a two byte length field
+followed by data.
+The length is defined as the length of the data plus 2 bytes (the length field itself)
+but without the marker.
+</p></div></div>
+    </li><li name="net.n12n.exif.ShortListTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ShortListTagextendsListTag[Int]"></a>
+      <a id="ShortListTag:ShortListTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ShortListTag.html"><span class="name">ShortListTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ListTag">ListTag</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ShortListTagextendsListTag[Int]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.ShortTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ShortTagextendsValueTag[Int]"></a>
+      <a id="ShortTag:ShortTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ShortTag.html"><span class="name">ShortTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<span class="extype" name="scala.Int">Int</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ShortTagextendsValueTag[Int]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.SignedRational" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SignedRationalextendsProductwithSerializable"></a>
+      <a id="SignedRational:SignedRational"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SignedRational.html"><span class="name">SignedRational</span></a><span class="params">(<span name="numerator">numerator: <span class="extype" name="scala.Int">Int</span></span>, <span name="denominator">denominator: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@SignedRationalextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.SignedRationalTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SignedRationalTagextendsValueTag[net.n12n.exif.SignedRational]"></a>
+      <a id="SignedRationalTag:SignedRationalTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="SignedRationalTag.html"><span class="name">SignedRationalTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="SignedRational.html" class="extype" name="net.n12n.exif.SignedRational">SignedRational</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@SignedRationalTagextendsValueTag[net.n12n.exif.SignedRational]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Tag" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TagextendsAnyRef"></a>
+      <a id="Tag:Tag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Tag.html"><span class="name">Tag</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TagextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.TagImpl" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TagImplextendsTag"></a>
+      <a id="TagImpl:TagImpl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TagImpl.html"><span class="name">TagImpl</span></a><span class="result"> extends <a href="Tag.html" class="extype" name="net.n12n.exif.Tag">Tag</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TagImplextendsTag" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Create a marker tag.</p>
+    </li><li name="net.n12n.exif.TiffIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TiffIfdextendsIfd"></a>
+      <a id="TiffIfd:TiffIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="TiffIfd.html"><span class="name">TiffIfd</span></a><span class="result"> extends <a href="Ifd.html" class="extype" name="net.n12n.exif.Ifd">Ifd</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TiffIfdextendsIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">IFD defined by TIFF standard.</p>
+    </li><li name="net.n12n.exif.TiffTag" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TiffTag[T]extendsTypedTag[T]"></a>
+      <a id="TiffTag[T]:TiffTag[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="TiffTag.html"><span class="name">TiffTag</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="TypedTag.html" class="extype" name="net.n12n.exif.TypedTag">TypedTag</a>[<span class="extype" name="net.n12n.exif.TiffTag.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TiffTag[T]extendsTypedTag[T]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Type" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TypeextendsAnyRef"></a>
+      <a id="Type:Type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Type.html"><span class="name">Type</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TypeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">IFD attribute types.</p>
+    </li><li name="net.n12n.exif.TypedTag" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TypedTag[T]extendsTag"></a>
+      <a id="TypedTag[T]:TypedTag[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="TypedTag.html"><span class="name">TypedTag</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <a href="Tag.html" class="extype" name="net.n12n.exif.Tag">Tag</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TypedTag[T]extendsTag" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Undefined" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UndefinedextendsByteSeq"></a>
+      <a id="Undefined:Undefined"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Undefined.html"><span class="name">Undefined</span></a><span class="result"> extends <a href="ByteSeq.html" class="extype" name="net.n12n.exif.ByteSeq">ByteSeq</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@UndefinedextendsByteSeq" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.UndefinedTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UndefinedTagextendsValueTag[net.n12n.exif.Undefined]"></a>
+      <a id="UndefinedTag:UndefinedTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="UndefinedTag.html"><span class="name">UndefinedTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="Undefined.html" class="extype" name="net.n12n.exif.Undefined">Undefined</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@UndefinedTagextendsValueTag[net.n12n.exif.Undefined]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.UserCommentTag" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UserCommentTagextendsValueTag[net.n12n.exif.MultiByteString]"></a>
+      <a id="UserCommentTag:UserCommentTag"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="UserCommentTag.html"><span class="name">UserCommentTag</span></a><span class="result"> extends <span class="extype" name="net.n12n.exif.ValueTag">ValueTag</span>[<a href="MultiByteString.html" class="extype" name="net.n12n.exif.MultiByteString">MultiByteString</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@UserCommentTagextendsValueTag[net.n12n.exif.MultiByteString]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="net.n12n.exif.ByteOrder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ByteOrder"></a>
+      <a id="ByteOrder:ByteOrder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ByteOrder$.html"><span class="name">ByteOrder</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ByteOrder" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"></p>
+    </li><li name="net.n12n.exif.ByteSeq" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ByteSeq"></a>
+      <a id="ByteSeq:ByteSeq"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ByteSeq$.html"><span class="name">ByteSeq</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ByteSeq" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Exif" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Exif"></a>
+      <a id="Exif:Exif"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Exif$.html"><span class="name">Exif</span></a><span class="result"> extends <span class="extype" name="scala.App">App</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@Exif" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Simple command-line tool to view Exif segment content.</p>
+    </li><li name="net.n12n.exif.ExifIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExifIfd"></a>
+      <a id="ExifIfd:ExifIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExifIfd$.html"><span class="name">ExifIfd</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ExifIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.ExifSegment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExifSegment"></a>
+      <a id="ExifSegment:ExifSegment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExifSegment$.html"><span class="name">ExifSegment</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@ExifSegment" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.GpsIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GpsIfd"></a>
+      <a id="GpsIfd:GpsIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="GpsIfd$.html"><span class="name">GpsIfd</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@GpsIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">GPS IFD tags.</p>
+    </li><li name="net.n12n.exif.IfdAttribute" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IfdAttribute"></a>
+      <a id="IfdAttribute:IfdAttribute"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="IfdAttribute$.html"><span class="name">IfdAttribute</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@IfdAttribute" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.JpegMetaData" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="JpegMetaData"></a>
+      <a id="JpegMetaData:JpegMetaData"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="JpegMetaData$.html"><span class="name">JpegMetaData</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@JpegMetaData" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Read read JPEG meta-data.</p><div class="fullcomment"><div class="comment cmt"><p>Read read JPEG meta-data.</p><p>Example: List all attributes</p><pre>JpegMetaData(<span class="lit">"image.jpg"</span>).exif.foreach(_.ifds.flatMap(_.attributes).foreach(
+  attr <span class="kw">=&gt;</span> println(s<span class="lit">"${attr.tag.name}: ${attr.value}"</span>)))</pre></div></div>
+    </li><li name="net.n12n.exif.MultiByteString" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiByteString"></a>
+      <a id="MultiByteString:MultiByteString"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MultiByteString$.html"><span class="name">MultiByteString</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@MultiByteString" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Numeric" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Numeric"></a>
+      <a id="Numeric:Numeric"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Numeric$.html"><span class="name">Numeric</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@Numeric" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Numeric value.</p>
+    </li><li name="net.n12n.exif.Orientation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Orientation"></a>
+      <a id="Orientation:Orientation"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Orientation$.html"><span class="name">Orientation</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@Orientation" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Image orientation.</p>
+    </li><li name="net.n12n.exif.Segment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Segment"></a>
+      <a id="Segment:Segment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Segment$.html"><span class="name">Segment</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@Segment" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.TiffIfd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TiffIfd"></a>
+      <a id="TiffIfd:TiffIfd"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="TiffIfd$.html"><span class="name">TiffIfd</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@TiffIfd" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      
+    </li><li name="net.n12n.exif.Type" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Type"></a>
+      <a id="Type:Type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Type$.html"><span class="name">Type</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#net.n12n.exif.package@Type" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Simple types used in JPEG/EXIF.</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
