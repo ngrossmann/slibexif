@@ -25,6 +25,7 @@ package net.n12n.exif
  * 
  * @param exif The Exif segment containing this IFD.
  * @param offset Start of this IFD relative to the ``tiffOffset``.
+ * @param name
  */
 abstract class Ifd(exif: ExifSegment, offset: Int, val name: String) {
   type TagType <: TypedTag[_]

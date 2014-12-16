@@ -45,6 +45,16 @@ object IfdAttribute {
   }
 }
 
+/**
+ * Meta-data attributes, containing the actual data.
+ * An IFD attribute is identified by a [[net.n12n.exif.Tag]] and a type, they contain either a single value
+ * of the given type or a sequence of values.
+ * @param tag typed tag, identifying tag ID and type.
+ * @param typeId type ID, required due to the [[net.n12n.exif.Numeric]] type which may be a short or integer.
+ * @param count count of values.
+ * @param data byte array containing data.
+ * @param order byte order used in this JPEG, required for correct conversion of numeric values.
+ */
 class IfdAttribute(val tag: TypedTag[_], val typeId: Int, val count: Int, val data: ByteSeq, order: ByteOrder) {
   /** The Scala type to which this attribute maps. */
   // FIXME require(tagType.size * count == data.length)
@@ -59,18 +69,3 @@ class IfdAttribute(val tag: TypedTag[_], val typeId: Int, val count: Int, val da
     "%s(%s, %s)".format(getClass().getSimpleName(), tag, sval)
   }
 }
-
-//class GenericIfdAttribute[T](tag: TypedTag[T], tagType: Type, count: Int, data: ByteSeq,
-//    order: ByteOrder)
-//  extends IfdAttribute(tag, tagType, count, data) {
-//  override type V = T
-//  override lazy val value: V = tag.value(this, order)
-//}
-
-//class GenericIfdListAttribute[T](tag: TypedTag[T], tagType: Type, count: Int, data: ByteSeq, 
-//    order: ByteOrder) 
-//  extends IfdAttribute(tag, tagType, count, data) {
-//  override type V = List[T]
-//  override val value: V = (for (i <- 0 until count) 
-//    yield tagType.toScala(data,i * tagType.size, order)).toList
-//}

@@ -1,5 +1,7 @@
+import com.typesafe.sbt.SbtSite.site
 import sbt._
 import Keys._
+import com.typesafe.sbt._
 
 object LibExifBuild extends Build {
   val dependencies = Seq(
@@ -48,7 +50,8 @@ object LibExifBuild extends Build {
 
   )
 
-  lazy val slibexif = Project(id = "slibexif", base = file("."), settings = slibexifSettings)
+  lazy val slibexif = Project(id = "slibexif", base = file("."), settings = slibexifSettings).
+    settings(site.settings : _*).settings(site.includeScaladoc() : _*)
   
   lazy val examples = Project(id = "examples", base = file("examples")).dependsOn(slibexif)
 }

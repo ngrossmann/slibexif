@@ -23,6 +23,16 @@ import java.io.InputStream
 import scala.io.BufferedSource
 import java.lang.{IllegalArgumentException, IllegalStateException}
 import java.io.FileInputStream
+
+/**
+ * Read read JPEG meta-data.
+ *
+ * Example: List all attributes
+ * {{{
+ *     JpegMetaData("image.jpg").exif.foreach(_.ifds.flatMap(_.attributes).foreach(
+ *       attr => println(s"\${attr.tag.name}: \${attr.value}")))
+ * }}}
+ */
 object JpegMetaData {
   /**
    * Read image from file.
@@ -30,23 +40,31 @@ object JpegMetaData {
    */
   def apply(file: String): JpegMetaData = new JpegMetaData(new FileInputStream(file))
 }
+
 /**
- * Read JPEG from byte stream.
+ * Read read JPEG meta-data.
+ *
+ * @constructor Read JPEG from byte stream.
  * 
  * @param data JPEG data stream.
  */
 class JpegMetaData(data: InputStream) {
+  /** Byte sequence marking Start Of Image. */
   val SoiMarker = ByteSeq(0xff, 0xd8)
+  /** Byte sequence marking Start of Scan header */
   val SosMarker = ByteSeq(0xff, 0xda)
-  val in = new ByteStream(data)
-  val soi = ByteSeq(2, in)
+
+  private val in = new ByteStream(data)
+  private val soi = ByteSeq(2, in)
+
   if (SoiMarker != soi) throw new IllegalArgumentException("Not a JPEG image, expected " + SoiMarker +
     " found " + soi)
+  /** List of meta-data segments (exif and comment). */
   val segments = parseSegments(in)
-  /** List of comment segments */
+  /** Direct access to comment segments */
   val comments: List[ComSegment] = segments.filter(_.marker == Segment.ComMarker).
     map(_.asInstanceOf[ComSegment])
-  
+  /**  Direct access to exif segment. */
   val exif: Option[ExifSegment] = 
     segments.find(_.isInstanceOf[ExifSegment]).map(_.asInstanceOf[ExifSegment])
   

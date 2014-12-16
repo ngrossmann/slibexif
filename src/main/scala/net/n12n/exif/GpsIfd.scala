@@ -20,7 +20,7 @@
 package net.n12n.exif
 
 /**
- * GPS IFD.
+ * IFD for GPS related data.
  * @author niklas
  *
  */
@@ -29,8 +29,15 @@ class GpsIfd(exif: ExifSegment, offset: Int) extends Ifd(exif, offset, "GPS IFD"
   override val Tags = GpsIfd.Tags
 }
 
+/**
+ * Marker trait for GPS IFD tags.
+ * @tparam T
+ */
 trait GpsTag[T] extends TypedTag[T]
 
+/**
+ * GPS IFD tags.
+ */
 object GpsIfd {
   
   val GPSVersionID = new ByteTag(0, "GPSVersionID") with GpsTag[ByteSeq]
