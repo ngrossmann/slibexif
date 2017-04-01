@@ -5,7 +5,7 @@ import com.typesafe.sbt._
 
 object LibExifBuild extends Build {
   val dependencies = Seq(
-      "org.scalatest" %% "scalatest" % "2.1.7" % "test" cross CrossVersion.binary
+      "org.scalatest" %% "scalatest" % "3.0.1" % "test" cross CrossVersion.binary
   )
 
   override lazy val settings = super.settings ++ Seq(
@@ -20,7 +20,7 @@ object LibExifBuild extends Build {
   lazy val slibexifSettings = Defaults.coreDefaultSettings ++ Seq(
 
     name := "slibexif",
-    crossScalaVersions := Seq("2.10.4", "2.11.4"),
+    crossScalaVersions := Seq("2.10.4", "2.11.4", "2.12.1"),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
       if (isSnapshot.value)
